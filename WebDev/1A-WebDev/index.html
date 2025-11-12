@@ -7,8 +7,6 @@
 </head>
 <body class="body">
     <style>
-        /* *{box-sizing:border-box} */
-
         .body{
             font-family:Calibri;
             background-color:#f4f4f4;
@@ -26,69 +24,6 @@
             width:100%;
         }
 
-        .box{
-            width: 30%;
-            /* ... */
-        }
-
-        .footer{
-            background-color:#808080;
-            color:white;
-            clear:both;
-            margin-top:20px;
-        }
-
-        /* Unique heading for div box */
-        #h2html{color:red}
-        #h2css{color:dodgerblue}
-        #h2js{color:forestgreen}
-         
-        table{
-            border-collapse:collapse;
-            width:100%;
-            margin-top:10px;
-            /* background:#fff;
-            border-radius:6px;
-            overflow:hidden; */
-        }
-  
-        td{
-            /* softer than 2px black */
-            /* border:1px solid #e5e7eb; */
-            /* padding:10px 12px; */
-            /* text-align:right; */
-            border:2px solid;
-            padding:5px;
-        }
-
-        /* make first row look like a header without changing HTML */
-        /* table tr:first-child td{
-            background:#f7f7f7;
-            font-weight:700;
-        } */
-
-        /* slightly smaller, consistent spacing */
-        /* img{height:80px; margin:6px} */
-        img{height:100px; margin:5px }
-
-        div>h3, div>ul{
-            text-align:right;
-            /* margin:14px 0 8px; */
-        }
-
-        /* div ul{
-            padding-right:18px;
-            margin:0 0 8px;
-        }
-
-        div li{ margin:6px 0; } */
-
-        div p{
-            /* line-height:1.9; */
-            line-height:25px;
-            /* margin:0 0 12px; */
-        }
-
         div div{
             width:30%;
             float:left;
@@ -99,22 +34,42 @@
             background-color:#eaeaea;
             border-radius:5px;
             box-shadow:0px 0px 10px rgba(0,0,0,0.1);
-
-            /* inner padding for readability */
-            /* padding:16px; */
-            /* text-align:right; */
         }
 
-        /* responsive: stack nicely on small screens */
-        /* @media (max-width: 900px){
-            div div{ width:47%; }
+        /* Unique heading for div box */
+        #h2html{color:red}
+        #h2css{color:dodgerblue}
+        #h2js{color:forestgreen}
+        
+        div>h3, div>ul, div>ol{
+            text-align:right;
         }
-        @media (max-width: 600px){
-            .header, .footer{ padding:18px 12px; }
-            .container{ padding:18px 12px; }
-            div div{ width:100%; margin-left:0; margin-right:0; }
-            img{ height:72px; }
-        } */
+        
+        div div p{
+            line-height:24px;
+        }
+        
+        div div table{
+            border-collapse:collapse;
+            width:100%;
+            margin-top:10px;
+        }
+        
+        table td{
+            border:2px black solid;
+            padding:5px;
+        }
+        
+        .footer{
+            background-color:#808080;
+            color:white;
+            clear:both;
+            padding: 0px;
+            margin-top:20px;
+        }
+        
+        img{height:100px; margin:5px }
+
     </style>
     
     <!-- header div -->
@@ -131,12 +86,24 @@
         <div>
             <h2 id="h2html">HTML(HyperText Markup Language)</h2>
             <p>
-                HTML שפה המשמשת לתצוגה של תוכן באתרי אינטרנט. למרות ש-HTML<br>
-                לא נחשבת לשפת תכנות אלא לשפת סימון (Markup language), היא עדיין<br>
-                מאוד חשובה מכיוון שהיא משמשת כ”שלד” של רוב עמודי האינטרנט בעולם.<br>
-                על מנת להוסיף טקסט, תמונות או כל מדיה אחרת לדף אינטרנט מסוים,<br>
-                משתמשים ב- HTML.בעצם, כל מה שהמשתמש רואה באתר מקבל את<br>
-                המאפיינים הבסיסיים שלו מקוד ה- HTML.
+                <strong>HTML</strong>
+                שפה המשמשת לתצוגה של תוכן באתרי אינטרנט. למרות ש-
+                <strong>HTML</strong>
+                <br>
+                לא נחשבת לשפת תכנות אלא לשפת סימון 
+                (<strong>Markup language</strong>),
+                היא עדיין
+                <br>
+                מאוד חשובה מכיוון שהיא משמשת כ”שלד” של רוב עמודי האינטרנט בעולם.
+                <br>
+                על מנת להוסיף טקסט, תמונות או כל מדיה אחרת לדף אינטרנט מסוים,
+                <br>
+                משתמשים ב- 
+                <strong>HTML</strong>.
+                בעצם, כל מה שהמשתמש רואה באתר מקבל את
+                <br>
+                המאפיינים הבסיסיים שלו מקוד ה- 
+                <strong>HTML</strong>.
             </p>
 
             <table>
@@ -146,15 +113,23 @@
                 </tr>
 
                 <tr>
-                    <td>XHTML היא גרסה מתקדמת של HTML</td>
+                    <td>
+                        <strong>XHTML</strong>
+                        היא גרסה מתקדמת של 
+                        <strong>HTML</strong>
+                    </td>
                     <td>
                         <a href="https://internet-israel.com/%D7%A4%D7%99%D7%AA%D7%95%D7%97-%D7%90%D7%99%D7%A0%D7%98%D7%A8%D7%A0%D7%98/%D7%91%D7%A0%D7%99%D7%99%D7%AA-%D7%90%D7%AA%D7%A8%D7%99-%D7%90%D7%99%D7%A0%D7%98%D7%A8%D7%A0%D7%98-%D7%9C%D7%9E%D7%A4%D7%AA%D7%97%D7%99%D7%9D/%D7%A2%D7%9C-%D7%94%D7%94%D7%91%D7%93%D7%9C-%D7%91%D7%99%D7%9F-html-%D7%9C-xhtml/">
-                        ההבדל בין xhtml לhtml</a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>HTML5 הגרסה החדשה ביותר של HTML</td>
+                            ההבדל בין xhtml לhtml</a>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <strong>HTML5</strong>
+                            הגרסה החדשה ביותר של 
+                            <strong>HTML</strong>
+                        </td>
                     <td><a href="https://webmaster.org.il/html5/"> מדריך לHTML5</a></td>
                 </tr>
 
@@ -174,14 +149,16 @@
         <div >
             <h2 id="h2css">CSS(Cascading Style Sheets) </h2>
             <p>
-                CSS
+                <strong>CSS</strong>
                 שפה שבה משתמשים כדי לעצב
                 אתרי אינטרנט. בעוד ש- 
-                HTML
-                יוצרת<br>
+                <strong>HTML</strong>
+                יוצרת
+                <br>
                 את המבנה ואת התוכן של האתר כמו פסקאות, כותרות ותמונות, 
-                CSS
-                לוקחת<br>
+                <strong>CSS</strong>
+                לוקחת
+                <br>
                 את האלמנטים האלה וגורמת להם להיראות טוב.
             </p>
 
@@ -192,12 +169,15 @@
                 </tr>
 
                 <tr>
-                    <td>CSS3</td>
+                    <td><strong>CSS3</strong></td>
                     <td><a href="https://www.freecodecamp.org/news/tag/css3/">מדריך CSS3</a></td>
                 </tr>
-
+                
                 <tr>
-                    <td>CSS4 בתהליכי התפתחות</td>
+                    <td>
+                        <strong>CSS4</strong>
+                         בתהליכי התפתחות
+                    </td>
                 </tr>
             </table>
 
@@ -209,21 +189,22 @@
             </ul>
         </div>
 
-
         <!-- JS div -->
         <div >
             <h2 id="h2js">JS(Java Script) </h2>
             <p>
-                JS 
+                <strong>JS</strong>
                 שפת תכנות זו נועדה לפיתוח אלמנטים דינמיים
-                של אתרי אינטרנט בצד<br>
+                של אתרי אינטרנט בצד
+                <br>
                 הלקוח (פרונטאנד), אך לאחרונה 
-                JavaScript
-                הופכת שימושית יותר ויותר גם<br>
-                 לפיתוח
-                Backend
+                <strong>JavaScript</strong>
+                הופכת שימושית יותר ויותר גם
+                <br>
+                לפיתוח
+                <strong>Backend</strong>
                 (צד השרת) באמצעות טכנולוגיית 
-                Node.js.
+                <strong>Node.js</strong>.
             </p>
 
             <table>
@@ -233,12 +214,12 @@
                 </tr>
 
                 <tr>
-                    <td>ES11</td>
+                    <td><strong>ES11</strong></td>
                     <td><a href="https://dev.to/aryclenio/the-new-features-of-javascript-in-2020-es11-7jc">אלמנטי ES11</a></td>
                 </tr>
-
+                
                 <tr>
-                    <td>ES12</td>
+                    <td><strong>ES12</strong></td>
                     <td><a href="https://dev.to/naimlatifi5/ecmascript-2021-es12-new-features-2l67">אלמנטי ES12</a></td>
                 </tr>
             </table>
