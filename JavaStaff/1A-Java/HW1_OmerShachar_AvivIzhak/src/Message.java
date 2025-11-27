@@ -1,19 +1,47 @@
+import java.util.Date;
+import java.util.List;
 import java.util.ArrayList;
 
-public abstract class Message {
-    // Fields:
-    public String sender;
-    public String content;
-    public Date sendDate; // Using Date class that i wrote in the open university...
+/**
+ * Abstract base class representing a message in the messaging system.
+ * Provides common functionality for all message types including sender,
+ * content, date, and unique message ID generation.
+ * 
+ * @author Omer Shachar & Aviv itzak
+ * @version 1.0
+ */
 
+
+public abstract class Message {
+        
+    private String sender;
+    private String content;
+    private Date sendDate;
+    private final int messageID;
+    private static int messageIDCount = 1;
     public final String DEFAULT_SENDER = "";
     public final String DEFAULT_CONTENT = "";
+    
+    /**
+     * Constructs a Message with sender, content, and send date.
+     * 
+     * @param sender The sender's name (cannot be null or empty)
+     * @param content The message content (cannot be null or empty)
+     * @param sendDate The date the message was sent (cannot be null)
+     * @throws IllegalArgumentException if sender or content is null or empty
+     */
+    public Message(String sender, String content, Date sendDate) {
+        setSender(sender);
+        setContent(content);
+        setSendDate(sendDate);
+        this.messageID = messageIDCount++;
+    }
 
     // Constructors:
     public Message() {
         this.sender = DEFAULT_SENDER;
         this.content = DEFAULT_CONTENT;
-        this.sendDate = new Date(0,0,0); // Sets the date to the default date
+        // this.sendDate = new Date(0,0,0); // Sets the date to the default date
     }
 
     public Message(String sender, String content, Date sendDate) {

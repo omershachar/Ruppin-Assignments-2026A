@@ -1,8 +1,14 @@
 # personal files & folders
-Omer
-local-javaOP/
+Omer/
+prDatabases/
+
+prWebDev/
 Assignments-Final/
+
+prJava/
+EclipseProjects/
 
 # system & random shit to be ignored
 .vs/
 .vscode/
+.github/
