@@ -9,7 +9,7 @@ public class Main {
 
     //create two messages manually
     EmailMessage emailMessage= new EmailMessage
-            ("Milki","Hello world, its a beautiful day","Hello");
+            ("Milky","Hello world, its a beautiful day","Hello");
 
     BoardMessage boardMessage = new BoardMessage
             ("Yoni","The weekly meeting will take place tomorrow at 10 AM","Weekly meeting");
