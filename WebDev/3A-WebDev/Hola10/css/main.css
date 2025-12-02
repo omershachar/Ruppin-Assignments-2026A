@@ -3044,7 +3044,7 @@ html.no-csstransitions .home-content__main {
 
 .s-contact {
     background-color: #151515;
-    background-image: url("../images/contact-bg.jpg");
+    background-image: url("../images/email-messages-network-circuit-board-link-connection-technology.JPG");
     background-repeat: no-repeat;
     background-position: center, center;
     padding-top: 13.2rem;
@@ -3310,6 +3310,7 @@ footer {
     padding: 6.6rem 0 4.2rem;
     text-align: center;
     color: rgba(255, 255, 255, 0.2);
+    background-color: #3A0E0E;
 }
 
 footer a, footer a:visited {
