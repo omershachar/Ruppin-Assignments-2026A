@@ -8,13 +8,16 @@
 .icons a i,
 .icons a span{color: white; }
 
-/*change hover color*/
+
 .icons a:hover,
 .icons a:hover i,
 .icons a:hover span
 {color: #d46a6a}
 
+.picksImg{border-radius: 10%; width: 320px; height: 320px; object-fit: cover; padding-bottom: 20px;}
 
+
+/*#blog article:nth-child(2) img {border-radius: 10%; width: 320px; height: 320px; display: block;margin: 0 auto; object-fit: cover;}*/
 
 .profile-box {display: flex; flex-direction: column;  align-items: center;}
 .line{width: 1px; background-color: white; height: 100px; }
