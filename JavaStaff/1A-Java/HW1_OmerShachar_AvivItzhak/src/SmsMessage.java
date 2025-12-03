@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.util.Date;
 
@@ -12,7 +11,6 @@ public class SmsMessage extends Message implements IDigital{
         if(content.length() > smsMaxLength){
             throw new SmsLengthException("Message content length exceeds sms max length!");
         }
-
     }
 
     public int getSmsMaxLength() {
@@ -38,6 +36,5 @@ public class SmsMessage extends Message implements IDigital{
         }
 
         return "[SMS] | From: " +getSender() + " Preview: " +content15;
-
     }
 }

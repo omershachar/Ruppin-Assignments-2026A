@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import java.util.Date;
-public  abstract class Message {
 
+public  abstract class Message {
+    
     private String sender;
     private String content;
     private Date sendDate;
@@ -9,7 +10,6 @@ public  abstract class Message {
     private static int messageIDCount=1;
 
     public Message(String sender, String content, Date sendDate) {
-
         setSender(sender);
         setContent(content);
         setSendDate(sendDate);
@@ -21,8 +21,10 @@ public  abstract class Message {
         setContent(content);
         sendDate = new Date();
         messageID=messageIDCount++;
-
-
+    }
+    
+    public String toString()  {
+        return "Sender is: " + sender + ", Content is: " + content + ", Date send: " + sendDate + ", Message ID: " + messageID;
     }
 
     //check if one of the word from the arraylist found in the message content
@@ -31,14 +33,8 @@ public  abstract class Message {
             if (content.contains(s)) {
                 return true;
             }
-
         }
         return false;
-    }
-
-    public String toString()  {
-        return "Sender is: " + sender + ", Content is: " + content + ", Date send: " + sendDate + ", Message ID: " + messageID;
-
     }
 
     //private method only accessible for this class(for the constructor)
@@ -46,13 +42,8 @@ public  abstract class Message {
     {
         if (sender.trim().isEmpty()) {
             throw new IllegalArgumentException("Sender name cannot be null! we unable to create this message!");
-
         }
         this.sender = sender;
-    }
-
-    public String getSender() {
-        return sender;
     }
 
     //private method only accessible for this class(for the constructor)
@@ -60,20 +51,23 @@ public  abstract class Message {
     {
         if (content.trim().isEmpty()) {
             throw new IllegalArgumentException("Content cannot be null! we unable to create this message!");
-        }
+        }    
         this.content = content;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
+    }    
+    
     public void setSendDate(Date sendDate) {
         this.sendDate = sendDate;
     }
 
-    public Date getSendDate() {
+    public String getSender() {
+        return sender;
+    }    
 
+    public String getContent() {
+        return content;
+    }    
+
+    public Date getSendDate() {
         return sendDate;
     }
 
@@ -85,10 +79,5 @@ public  abstract class Message {
         return content.length();
     }
 
-
-
     public abstract String generatePreview();
-
-
 }
-

@@ -1,10 +1,6 @@
 import java.util.Date;
 
-
-
 public class BoardMessage extends Message {
-
-
 
     private PriorityType priority;
     private String messageSubject;
@@ -13,22 +9,17 @@ public class BoardMessage extends Message {
         super(sender,content,sendDate);
         setPriority(priority);
         setMessageSubject(messageSubject);
-
     }
 
     public BoardMessage(String sender, String content,String messageSubject) {
         super(sender,content);
         priority=PriorityType.REGULAR;
         setMessageSubject(messageSubject);
-
     }
-
 
     public void setPriority(PriorityType priority) {
-
         this.priority = priority;
     }
-
 
     public PriorityType getPriority() {
         return priority;
@@ -57,7 +48,6 @@ public class BoardMessage extends Message {
         }
 
       return "[Board] "+ getSender() + ": " +content15 + "...";
-
     }
 
 }
