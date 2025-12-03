@@ -3,16 +3,13 @@ import java.util.ArrayList;
 
 public class EmailMessage extends Message implements IDigital{
 
-
     private String subject;
     private ArrayList<File> attachments;
-
 
     public EmailMessage(String sender, String content, String subject, ArrayList<File> attachments) {
         super(sender, content);
         setSubject(subject);
-        this.attachments = new ArrayList<File>(attachments);//crate a new arraylist with the same
-                                                            // content of attachments
+        this.attachments = new ArrayList<File>(attachments);//crate a new arraylist with the same content of attachments
     }
 
     public EmailMessage(String sender, String content, String subject) {
@@ -20,7 +17,6 @@ public class EmailMessage extends Message implements IDigital{
         attachments=new ArrayList<>();
         setSubject(subject);
     }
-
 
     public void setSubject(String subject)throws IllegalArgumentException {
         if (subject.trim().isEmpty()) {
@@ -62,15 +58,6 @@ public class EmailMessage extends Message implements IDigital{
         while(getAttachments().contains(file)) {
             getAttachments().remove(file);
         }
-
     }
-
-
-
-
-
-
-
-
 
 }
