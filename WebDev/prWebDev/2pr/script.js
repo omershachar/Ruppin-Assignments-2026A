@@ -1,1 +1,0 @@
-addEventListener("click",e=>{const t=e.target.closest("a,button");t&&!t.dataset.skipRick&&!(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0)&&(e.preventDefault(),open("https://www.youtube.com/watch?v=dQw4w9WgXcQ","_blank","noopener"))});
