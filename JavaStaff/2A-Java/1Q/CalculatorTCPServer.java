@@ -41,11 +41,7 @@ public class CalculatorTCPServer {
                 splitInput = input.split(" ");
 
                 //check if there is more 3 word(invalid)
-                if (splitInput.length!=3 && !Character.isDigit(splitInput[0].charAt(0)) ||
-                        !Character.isDigit(splitInput[2].charAt(0)) &&
-                        !splitInput[1].equals("+") &&
-                        !splitInput[1].equals("-") &&
-                        !splitInput[1].equals("*") && !splitInput[1].equals("/"))
+                if (!Check(splitInput))
                 {
                     result="Error: Invalid expression!";
                 }
@@ -98,6 +94,35 @@ public class CalculatorTCPServer {
 
 
     }
+
+    //validate input
+    public static boolean Check(String[] splitInput ) {
+
+        //check length
+        if (splitInput.length != 3) {
+            return false;
+        }
+
+        //check if digit
+        if (!Character.isDigit(splitInput[0].charAt(0)) ||
+                !Character.isDigit(splitInput[2].charAt(0))) {
+
+            return false;
+        }
+        //check if valid operator
+        if (!splitInput[1].equals("+") && !splitInput[1].equals("-") &&
+                !splitInput[1].equals("*") && !splitInput[1].equals("/")) {
+
+            return false;
+        }
+
+        return true;
+
+
+    }
+
+
+
 
 
 }
