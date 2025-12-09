@@ -14,7 +14,7 @@ public class QuoteUDPClient {
             System.out.println("Client connected to server at " + SERVER_HOST + ":" + SERVER_PORT);
             
             while (true) {
-                System.out.print("Enter 'GET' to receive a quote or 'exit' to quit: ");
+                System.out.print("Enter GET for quote or exit to quit: ");
                 String userInput = scanner.nextLine().trim();
                 
                 // Check if user wants to exit
@@ -51,9 +51,9 @@ public class QuoteUDPClient {
                     
                     // Extract and print the quote
                     String quote = new String(responsePacket.getData(), 0, responsePacket.getLength());
-                    System.out.println("Quote received: " + quote);
+                    System.out.println("Quote received: " + quote + "\n");
                 } else {
-                    System.out.println("Invalid input. Please enter 'GET' or 'exit'.");
+                    System.out.println("Invalid input. Please enter GET or exit.");
                 }
             }
             

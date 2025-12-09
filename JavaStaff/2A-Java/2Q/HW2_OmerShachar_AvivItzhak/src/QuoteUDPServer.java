@@ -16,7 +16,7 @@ public class QuoteUDPServer {
     public static void main(String[] args) {
         try {
             DatagramSocket socket = new DatagramSocket(PORT);
-            System.out.println("Server is listening on port " + PORT);
+            System.out.println("UDP Quote server listening on port " + PORT + "...");
             
             Random random = new Random();
             byte[] buffer = new byte[1024];
@@ -35,7 +35,7 @@ public class QuoteUDPServer {
                 
                 // Check if client wants to exit
                 if (clientMessage.equals("exit")) {
-                    System.out.println("Client requested to exit. Closing connection.");
+                    System.out.println("Server is shutting down.");
                     break;
                 }
                 
