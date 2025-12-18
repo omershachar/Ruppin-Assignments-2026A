@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HW4-Lottery Game</title>
     <style>
-        /* הגדרות בסיסיות ומשתנים */
         :root {
             --primary-color: #2c3e50;
             --accent-color: #3498db;
@@ -32,7 +31,6 @@
             margin-bottom: 10px;
         }
 
-        /* [cite: 16, 34] הצגת היתרה */
         #status-bar {
             background-color: var(--primary-color);
             color: white;
@@ -46,18 +44,14 @@
             z-index: 100;
         }
 
-        /* [cite: 21, 22] שימוש ב-Flexbox ו-Grid לעימוד הדף.
-           אין שימוש בטבלאות.
-        */
         .main-container {
             display: flex;
-            flex-direction: column; /* בדיפולט (מובייל) - הכל אחד מתחת לשני */
+            flex-direction: column;
             gap: 20px;
             width: 100%;
             max-width: 1200px;
         }
 
-        /* כרטיסים לאזורים השונים */
         .card {
             background: var(--card-bg);
             padding: 20px;
@@ -66,7 +60,6 @@
             flex: 1;
         }
 
-        /* [cite: 32] אזור בחירת המספרים הרגילים */
         .numbers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
@@ -74,7 +67,6 @@
             margin-top: 15px;
         }
 
-        /* [cite: 31] אזור בחירת המספר החזק */
         .strong-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
@@ -82,7 +74,6 @@
             margin-top: 15px;
         }
 
-        /* עיצוב כפתורי הבחירה (checkbox/radio מוסתרים ויזואלית לטובת עיצוב נקי) */
         .number-option input {
             display: none;
         }
@@ -100,7 +91,6 @@
             border: 2px solid transparent;
         }
 
-        /* סימון בחירה */
         .number-option input:checked + label {
             background-color: var(--accent-color);
             color: white;
@@ -108,12 +98,10 @@
             transform: scale(1.1);
         }
 
-        /* צבע שונה למספר חזק */
         .strong-grid .number-option input:checked + label {
             background-color: var(--secondary-color);
         }
 
-        /* [cite: 35] כפתורי שליטה */
         .controls {
             display: flex;
             gap: 15px;
@@ -150,7 +138,6 @@
             cursor: not-allowed;
         }
 
-        /*  אזור התוצאות */
         #results-log {
             max-height: 400px;
             overflow-y: auto;
@@ -168,7 +155,7 @@
         .nums-display { font-family: monospace; letter-spacing: 1px; }
 
         .game-over-overlay {
-            display: none; /* מוסתר בהתחלה */
+            display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.8);
@@ -180,21 +167,18 @@
             text-align: center;
         }
 
-        /*  Media Queries לרספונסיביות.
-           שינוי תצוגה במסכים גדולים: הטופס משמאל, התוצאות מימין.
-        */
         @media (min-width: 768px) {
             .main-container {
-                flex-direction: row; /* שינוי מטור לשורה */
+                flex-direction: row;
                 align-items: flex-start;
             }
 
             .game-board {
-                flex: 2; /* הלוח תופס יותר מקום */
+                flex: 2;
             }
 
             .results-panel {
-                flex: 1; /* אזור התוצאות בצד */
+                flex: 1;
                 position: sticky;
                 top: 100px;
             }
@@ -462,40 +446,35 @@
             const msgClass = prize > 0 ? 'win-msg' : 'lose-msg';
             const msgText = prize > 0 ? `זכייה! ${prize} ₪` : 'לא זכית הפעם';
 
-            div.innerHTML = `
-                <div class="nums-display"><strong>הגרלה:</strong> ${wReg.join(', ')} | <strong>חזק:</strong> ${wStrong}</div>
+            div.innerHTML = 
+                `<div class="nums-display"><strong>הגרלה:</strong> ${wReg.join(', ')} | <strong>חזק:</strong> ${wStrong}</div>
                 <div class="nums-display" style="font-size: 0.9em; color: #555;">הבחירה שלך: ${uReg.join(', ')} | חזק: ${uStrong}</div>
                 <div>פגיעות: ${hits} | חזק: ${sHit ? 'כן' : 'לא'}</div>
                 <div class="${msgClass}">${msgText}</div>
-                <div style="font-size: 0.8em; color: #7f8c8d;">יתרה לאחר משחק: ${balance} ₪</div>
-            `;
+                <div style="font-size: 0.8em; color: #7f8c8d;">יתרה לאחר משחק: ${balance} ₪</div>`;
             
-            // הוספה לראש הרשימה
             elResultsLog.prepend(div);
         }
-
+        
         /**
-         * [cite: 18, 44, 45] סיום משחק
-         * מופעל ידנית או אוטומטית כשנגמר הכסף
+         * Ending the game
+         * Manually or automatically when the money runs out
          */
         function finishGame(customMsg = null) {
             gameActive = false;
             
-            // נטרול טופס וכפתורים
+            // Reset the form and buttons
             document.querySelectorAll('input').forEach(i => i.disabled = true);
             elBtnCheck.disabled = true;
             document.getElementById('btn-finish').disabled = true;
 
-            // עדכון המודל הסופי
             const msg = customMsg || "החלטת לסיים את המשחק.";
             document.getElementById('final-message').innerText = msg;
             document.getElementById('final-balance').innerText = balance;
             
-            // הצגת המודל
             elGameOverModal.style.display = 'flex';
         }
 
-        // הפעלה ראשונית
         initGame();
 
     </script>
