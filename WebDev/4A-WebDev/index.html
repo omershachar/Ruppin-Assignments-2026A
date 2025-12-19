@@ -1,482 +1,51 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HW4-Lottery Game</title>
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --secondary-color: #e74c3c;
-            --success-color: #27ae60;
-            --bg-color: #ecf0f1;
-            --card-bg: #ffffff;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 20px;
-            color: var(--primary-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        h1, h2, h3 {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        #status-bar {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 10px;
-            z-index: 100;
-        }
-
-        .main-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 100%;
-            max-width: 1200px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            flex: 1;
-        }
-
-        .numbers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .strong-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .number-option input {
-            display: none;
-        }
-
-        .number-option label {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 45px;
-            background-color: #eee;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-weight: bold;
-            border: 2px solid transparent;
-        }
-
-        .number-option input:checked + label {
-            background-color: var(--accent-color);
-            color: white;
-            border-color: var(--primary-color);
-            transform: scale(1.1);
-        }
-
-        .strong-grid .number-option input:checked + label {
-            background-color: var(--secondary-color);
-        }
-
-        .controls {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        button {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: background 0.3s;
-            font-family: inherit;
-        }
-
-        #btn-check {
-            background-color: var(--success-color);
-            color: white;
-        }
-
-        #btn-check:hover { background-color: #219150; }
-
-        #btn-finish {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-
-        #btn-finish:hover { background-color: #c0392b; }
-
-        button:disabled {
-            background-color: #95a5a6;
-            cursor: not-allowed;
-        }
-
-        #results-log {
-            max-height: 400px;
-            overflow-y: auto;
-            border-top: 2px solid #eee;
-        }
-
-        .result-entry {
-            border-bottom: 1px solid #eee;
-            padding: 10px 0;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .win-msg { color: var(--success-color); font-weight: bold; }
-        .lose-msg { color: var(--secondary-color); }
-        .nums-display { font-family: monospace; letter-spacing: 1px; }
-
-        .game-over-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.8);
-            color: white;
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-        }
-
-        @media (min-width: 768px) {
-            .main-container {
-                flex-direction: row;
-                align-items: flex-start;
-            }
-
-            .game-board {
-                flex: 2;
-            }
-
-            .results-panel {
-                flex: 1;
-                position: sticky;
-                top: 100px;
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    <title>Lottery Game</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <h1>הגרלת לוטו - ג'אווה סקריפט</h1>
-
+    <h1>הגרלת לוטו</h1>
     <div id="status-bar">
-        יתרה: <span id="current-balance">1000</span> ₪
+        יתרה: 
+        <span id="balance">1000</span>
+        ₪
     </div>
+    <div class="container">
 
-    <div class="main-container">
-        <section class="card game-board">
-            <h2>טופס הגרלה</h2>
-            <p>עלות הגרלה: 300 ₪</p>
+        <section class="card game-section">
+            <h2>טופס הגרלה (300₪)</h2>
 
-            <div class="section-title">
-                <h3>1. בחר 6 מספרים (1-37):</h3>
-                <small id="selection-count">נבחרו: 0/6</small>
+            <h3>1. בחר 6 מספרים (1-37)</h3>
+            <div>נבחרו: <span id="regular-count">0/6</span></div>
+            <div id="grid-regular" class="numbers-grid">
+                <!-- Regular numbers -->
             </div>
-            <div class="numbers-grid" id="regular-numbers-container">
-                </div>
-
+            
             <hr>
-
-            <div class="section-title">
-                <h3>2. בחר מספר חזק (1-7):</h3>
+            
+            <h3>2. בחר מספר חזק (1-7)</h3>
+            <div id="grid-strong" class="numbers-grid" style="grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));">
+                <!-- Strong numbers -->
             </div>
-            <div class="strong-grid" id="strong-numbers-container">
-                </div>
-
+            
             <div class="controls">
-                <button id="btn-check" onclick="checkLottery()">בדיקת הגרלה</button>
-                <button id="btn-finish" onclick="finishGame()">סיים הגרלות</button>
+                <button class="action-btn btn-check" onclick="checkGame()">בדיקת הגרלה</button>
+                <button class="action-btn btn-finish" onclick="endGame()">סיים</button>
             </div>
         </section>
 
-        <aside class="card results-panel">
-            <h2>תוצאות והיסטוריה</h2>
+        <aside class="card results-section">
+            <h2>תוצאות</h2>
             <div id="results-log">
-                <p style="color: #7f8c8d; text-align: center;">טרם בוצעו הגרלות</p>
+                <p>עוד לא בוצעו הגרלות</p>
             </div>
         </aside>
+
     </div>
 
-    <div id="game-over-modal" class="game-over-overlay">
-        <h1>המשחק הסתיים!</h1>
-        <h2 id="final-message"></h2>
-        <h3>יתרה סופית: <span id="final-balance"></span> ₪</h3>
-        <p>רענן את הדף למשחק חדש</p>
-    </div>
-
-    <script>
-        /**
-         * משתני מצב גלובליים
-         */
-        let balance = 1000; // [cite: 16] התחלה עם 1000 ש"ח
-        const TICKET_COST = 300; // [cite: 16] עלות כרטיס
-        let gameActive = true;
-
-        // אלמנטים ב-DOM
-        const elBalance = document.getElementById('current-balance');
-        const elRegularContainer = document.getElementById('regular-numbers-container');
-        const elStrongContainer = document.getElementById('strong-numbers-container');
-        const elSelectionCount = document.getElementById('selection-count');
-        const elResultsLog = document.getElementById('results-log');
-        const elBtnCheck = document.getElementById('btn-check');
-        const elGameOverModal = document.getElementById('game-over-modal');
-
-        /**
-         * אתחול הלוח בטעינת הדף
-         * [cite: 30] יצירת הטופס
-         */
-        function initGame() {
-            // יצירת 37 תיבות סימון למספרים הרגילים
-            for (let i = 1; i <= 37; i++) {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'number-option';
-                
-                const input = document.createElement('input');
-                input.type = 'checkbox';
-                input.id = `reg-${i}`;
-                input.value = i;
-                input.name = 'regular-nums';
-                input.onchange = handleRegularSelection; // האזנה לשינוי כדי להגביל ל-6
-
-                const label = document.createElement('label');
-                label.htmlFor = `reg-${i}`;
-                label.innerText = i;
-
-                wrapper.appendChild(input);
-                wrapper.appendChild(label);
-                elRegularContainer.appendChild(wrapper);
-            }
-
-            // יצירת 7 כפתורי רדיו למספר החזק (רק אחד יכול להיבחר)
-            for (let i = 1; i <= 7; i++) {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'number-option';
-
-                const input = document.createElement('input');
-                input.type = 'radio'; // רדיו מבטיח בחירה אחת בלבד [cite: 31]
-                input.id = `strong-${i}`;
-                input.value = i;
-                input.name = 'strong-num';
-
-                const label = document.createElement('label');
-                label.htmlFor = `strong-${i}`;
-                label.innerText = i;
-
-                wrapper.appendChild(input);
-                wrapper.appendChild(label);
-                elStrongContainer.appendChild(wrapper);
-            }
-        }
-
-        /**
-         * [cite: 32, 33] ניהול בחירת המספרים הרגילים
-         * מונע בחירה של יותר מ-6 מספרים
-         */
-        function handleRegularSelection(e) {
-            const checkedBoxes = document.querySelectorAll('input[name="regular-nums"]:checked');
-            elSelectionCount.innerText = `נבחרו: ${checkedBoxes.length}/6`;
-            
-            if (checkedBoxes.length > 6) {
-                alert("ניתן לבחור מקסימום 6 מספרים!");
-                e.target.checked = false; // ביטול הבחירה האחרונה
-                elSelectionCount.innerText = `נבחרו: 6/6`;
-            }
-        }
-
-        /**
-         * פונקציית עזר להגרלת מספר רנדומלי (כולל מינימום, כולל מקסימום)
-         */
-        function getRandomInt(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-
-        /**
-         *  הפונקציה הראשית - בדיקת ההגרלה
-         */
-        function checkLottery() {
-            if (!gameActive) return;
-
-            // 1. איסוף בחירות המשתמש
-            const selectedRegularInputs = Array.from(document.querySelectorAll('input[name="regular-nums"]:checked'));
-            const userRegularNums = selectedRegularInputs.map(input => parseInt(input.value));
-            
-            const selectedStrongInput = document.querySelector('input[name="strong-num"]:checked');
-            const userStrongNum = selectedStrongInput ? parseInt(selectedStrongInput.value) : null;
-
-            // [cite: 37] ולידציה: האם הטופס מלא?
-            if (userRegularNums.length !== 6 || userStrongNum === null) {
-                alert("נא למלא את הטופס במלואו: 6 מספרים רגילים ומספר חזק אחד.");
-                return;
-            }
-
-            // [cite: 17] בדיקה אם יש מספיק כסף
-            if (balance < TICKET_COST) {
-                finishGame("אין לך מספיק כסף לביצוע הגרלה נוספת.");
-                return;
-            }
-
-            // [cite: 16] חיוב המשתמש בעלות ההגרלה
-            balance -= TICKET_COST;
-            updateBalanceDisplay();
-
-            //  ביצוע ההגרלה (מספרי המחשב)
-            const winningRegularNums = [];
-            while (winningRegularNums.length < 6) {
-                let r = getRandomInt(1, 37);
-                if (!winningRegularNums.includes(r)) {
-                    winningRegularNums.push(r);
-                }
-            }
-            // מיון המספרים לתצוגה יפה
-            winningRegularNums.sort((a, b) => a - b);
-            const winningStrongNum = getRandomInt(1, 7);
-
-            // חישוב תוצאות
-            // בדיקת התאמות במספרים הרגילים
-            let matches = 0;
-            userRegularNums.forEach(num => {
-                if (winningRegularNums.includes(num)) matches++;
-            });
-            
-            // בדיקת התאמה במספר החזק
-            const strongMatch = (userStrongNum === winningStrongNum);
-
-            // [cite: 9, 11, 12, 13] חישוב הפרס
-            let prize = 0;
-            //  - המשתמש לא זוכה ביותר מפרס אחד (התנאים הם if/else if)
-            if (matches === 6 && strongMatch) {
-                prize = 1000; // [cite: 9]
-            } else if (matches === 6 && !strongMatch) {
-                prize = 600; // [cite: 11]
-            } else if (matches === 4 && strongMatch) {
-                prize = 400; // [cite: 12]
-            } else {
-                prize = 0; // [cite: 13]
-            }
-
-            // עדכון היתרה אם יש זכייה
-            if (prize > 0) {
-                balance += prize;
-            }
-            updateBalanceDisplay();
-
-            // [cite: 39] ניקוי הפקדים
-            resetForm();
-
-            // [cite: 40, 41, 42] הצגת תוצאות למשתמש
-            logResult(userRegularNums, userStrongNum, winningRegularNums, winningStrongNum, matches, strongMatch, prize);
-
-            // [cite: 44] בדיקה אם נגמר הכסף אחרי הסיבוב
-            if (balance < TICKET_COST) {
-                setTimeout(() => finishGame("נגמר לך הכסף להגרלות נוספות."), 1000);
-            }
-        }
-
-        /**
-         * [cite: 39] פונקציה לניקוי הטופס
-         */
-        function resetForm() {
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            checkboxes.forEach(cb => cb.checked = false);
-            const radios = document.querySelectorAll('input[type="radio"]');
-            radios.forEach(r => r.checked = false);
-            elSelectionCount.innerText = `נבחרו: 0/6`;
-        }
-
-        /**
-         * עדכון התצוגה של הכסף
-         */
-        function updateBalanceDisplay() {
-            elBalance.innerText = balance;
-            // חיווי ויזואלי אם הכסף נמוך
-            if (balance < TICKET_COST) {
-                elBalance.style.color = '#e74c3c';
-            } else {
-                elBalance.style.color = 'white';
-            }
-        }
-
-        /**
-         * [cite: 40, 41] הדפסת שורה להיסטוריה
-         */
-        function logResult(uReg, uStrong, wReg, wStrong, hits, sHit, prize) {
-            // אם זו השורה הראשונה, ננקה את הודעת ה"אין הגרלות"
-            if (elResultsLog.children[0] && elResultsLog.children[0].tagName === 'P') {
-                elResultsLog.innerHTML = '';
-            }
-
-            const div = document.createElement('div');
-            div.className = 'result-entry';
-            
-            const msgClass = prize > 0 ? 'win-msg' : 'lose-msg';
-            const msgText = prize > 0 ? `זכייה! ${prize} ₪` : 'לא זכית הפעם';
-
-            div.innerHTML = 
-                `<div class="nums-display"><strong>הגרלה:</strong> ${wReg.join(', ')} | <strong>חזק:</strong> ${wStrong}</div>
-                <div class="nums-display" style="font-size: 0.9em; color: #555;">הבחירה שלך: ${uReg.join(', ')} | חזק: ${uStrong}</div>
-                <div>פגיעות: ${hits} | חזק: ${sHit ? 'כן' : 'לא'}</div>
-                <div class="${msgClass}">${msgText}</div>
-                <div style="font-size: 0.8em; color: #7f8c8d;">יתרה לאחר משחק: ${balance} ₪</div>`;
-            
-            elResultsLog.prepend(div);
-        }
-        
-        /**
-         * Ending the game
-         * Manually or automatically when the money runs out
-         */
-        function finishGame(customMsg = null) {
-            gameActive = false;
-            
-            // Reset the form and buttons
-            document.querySelectorAll('input').forEach(i => i.disabled = true);
-            elBtnCheck.disabled = true;
-            document.getElementById('btn-finish').disabled = true;
-
-            const msg = customMsg || "החלטת לסיים את המשחק.";
-            document.getElementById('final-message').innerText = msg;
-            document.getElementById('final-balance').innerText = balance;
-            
-            elGameOverModal.style.display = 'flex';
-        }
-
-        initGame();
-
-    </script>
+<script src="script.js"></script>    
 </body>
 </html>

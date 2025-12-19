@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: blanchedalmond;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    direction: rtl;
+}
+
+h1, h2, h3 { margin: 10px 0; text-align: center; color: #333;}
+
+#status-bar {
+    background-color: #333;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 24px;
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); 
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.num-btn {
+    color: #333;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    background-color: #eee;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.num-btn.selected {
+    background-color: #3498db;
+    color: white;
+    border-color: #2980b9;
+}
+
+.num-btn.strong-selected {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.action-btn {
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
+.btn-check { background-color: #27ae60; }
+.btn-finish { background-color: #c0392b; }
+
+button:disabled { background-color: gray; cursor: not-allowed; }
+
+.result-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+    body {
+        background-color: lightsteelblue;
+    }
+}
+
+@media (min-width: 900px) {
+    body {
+        background-color: #ecf0f1;
+    }
+    .container {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    .game-section { flex: 2; }
+    .results-section { flex: 1; }
+}
