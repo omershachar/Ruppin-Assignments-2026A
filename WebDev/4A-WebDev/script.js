@@ -5,9 +5,6 @@ const PRIZE_ONE = 1000; // 6/6 and 1/1
 const PRIZE_TWO = 600; // 6/6 and 0/1
 const PRIZE_THREE = 400; // 4/6 and 1/1
 
-// const balanceSpan = document.getElementById('balance');
-// const resultLog = document.getElementById('results-log');
-
 // variables for storing the current game numbers
 let selectedR = [];
 let selectedS = null;
