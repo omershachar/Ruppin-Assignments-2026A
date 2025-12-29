@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>פריטים בקטגוריה</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <button class="back-btn" onclick="navigateToCategories()">← חזרה לקטגוריות</button>
+            <h1 id="category-title">פריטים בקטגוריה</h1>
+        </header>
+
+        <main class="items-main">
+            <div id="items-list" class="items-container">
+                <!-- Items will be dynamically loaded here -->
+            </div>
+            <div id="no-items" class="empty-state" style="display: none;">
+                <p>אין פריטים בקטגוריה זו</p>
+            </div>
+        </main>
+    </div>
+
+    <div id="success-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeSuccessModal()">&times;</span>
+            <h2>✅ רכישה בוצעה בהצלחה!</h2>
+            <p id="purchase-details"></p>
+            <button class="btn-primary" onclick="closeSuccessModal()">אישור</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="items.js"></script>
+</body>
+</html>
+

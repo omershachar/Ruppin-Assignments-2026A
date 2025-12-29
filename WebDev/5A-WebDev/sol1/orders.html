@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ההזמנות שלי</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <button class="back-btn" onclick="navigateToDashboard()">← חזרה למסך הראשי</button>
+            <h1>ההזמנות שלי</h1>
+            <div class="load-orders-section">
+                <input type="file" id="load-orders-file" accept=".json" style="display: none;" onchange="loadOrdersFromFile(event)">
+                <button class="btn-primary" onclick="document.getElementById('load-orders-file').click()">טען הזמנות מקובץ</button>
+            </div>
+        </header>
+
+        <main class="orders-main">
+            <div id="orders-list" class="orders-container">
+                <!-- Orders will be dynamically loaded here -->
+            </div>
+            <div id="no-orders" class="empty-state" style="display: none;">
+                <p>אין הזמנות עדיין</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="orders.js"></script>
+</body>
+</html>
+
