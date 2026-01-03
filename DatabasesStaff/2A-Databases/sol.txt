@@ -1,0 +1,70 @@
+Q1:
+
+π_ ArtistUserID,UserFirstName,UserLastName
+(
+  (∂_ UserBirthDate >= '2000-01-01'(tblUser) ⋈ tblArtistUser)
+  - (π_ UserID,UserFirstName,UserLastName
+    (
+      (∂_ UserBirthDate >= '2000-01-01'(tblUser) ⋈ tblArtistUser)
+      ⋈_userID=FollowerID tblArtistUserFollow
+    )
+ )
+
+השאילתא מחסרת מקבוצת האמנים הצעירים את קבוצת האמנים הצעירים שמופיעים בקבוצת העוקבים. כלומר נקבל את קבוצת האמנים הצעירים שלא עוקבים אחרי אף אמן אחר. ומהקבוצה הזאת מחזירה את המזהים הדרושים. 
+
+
+
+
+Q2:
+
+השאילתה מחזירה את מזהה האמן, היצירה ואת שם היצירה 
+של כל היצירות שיש להם לפחות 2 תגיות שונות,
+ולפחות אחת מאותן 2 תגיות בעלת רמת התאמה 4 ומעלה.
+
+
+Q3:
+
+select C.CreationName, U.UserFirstName + ' ' + U.UserLastName as fullName, C.TechnicName,C.CreationIsPhysicalShow
+from tblCreation C join tblUser U on C.ArtistUserID = U.UserID 
+where c.CreationStatus = 'Not Available' and C.CreationName is not null and C.CreationName<> ''
+order by fullName, C.CreationName
+
+
+Q4:
+
+select p1.CityName, p1.PhysicalGalleryAddress as address1, p2.PhysicalGalleryAddress as address2 , p3.PhysicalGalleryAddress as adress3
+from tblPhysicalGallery p1 inner join tblPhysicalGallery p2 on p1.CityName= p2.CityName inner join tblPhysicalGallery p3 on p1.CityName = p3.CityName
+where p1.PhysicalGalleryID < p2.PhysicalGalleryID and p2.PhysicalGalleryID < p3.PhysicalGalleryID
+
+
+Q5:
+
+select U.UserID,U.UserFirstName,U.UserLastName,R.ReviewText,E.ExhibitionName
+from tblUser U join tblReview R on R.CriticUserID = U.UserID join tblExhibition E on R.ExhibitionID=E.ExhibitionID
+where (GETDATE() BETWEEN E.ExhibitionDateStart and E.ExhibitionDateEnd) and R.ReviewDegree>=3
+
+
+
+Q6:
+
+select DISTINCT C.ArtistUserID, U.UserFirstName + ' ' + U.UserLastName as fullName, C.CreationName
+from tblUser U join tblCreation C on U.UserID = C.ArtistUserID left Join  tblDigitalGallery D on c.CreationID = D.CreationID1
+or c.CreationID = D.CreationID2 or c.CreationID = D.CreationID3
+where D.CreationID1 is null and D.CreationID2 is null and D.CreationID3 is null
+
+
+Q7:
+
+select distinct
+E.ExhibitionID,
+E.ExhibitionName,
+E.ExhibitionDateStart,
+E.ExhibitionDateEnd
+from tblExhibition E
+where E.ExhibitionStatus = 'Active' 
+  and DATEDIFF(day,E.ExhibitionDateStart,E.ExhibitionDateEnd) > 10
+  and (
+    select count(distinct V.CriticUserID)
+    from tblCVisitedE V
+    where V.ExhibitionID = E.ExhibitionID and V.PhysicalGalleryID = E.PhysicalGalleryID
+  ) >= 3;
