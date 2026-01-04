@@ -5,47 +5,41 @@ public class KnockKnockServer {
     public static void main(String[] args) throws IOException {
 
         ServerSocket serverSocket = null;
-        try 
-	{
+        try {
             serverSocket = new ServerSocket(4444);
-        } 
-	catch (IOException e) 
-	{
+            System.out.println("Server listening on port 4444");
+
+            while (true) {
+                Socket clientSocket = null;
+                try {
+                    clientSocket = serverSocket.accept();
+                    ClientHandler clientHandler = new ClientHandler(clientSocket);
+                    clientHandler.start();
+
+                } catch (IOException e) {
+                    System.err.println("Accept failed.");
+                    System.exit(1);
+                }
+
+            }
+        }
+        catch (IOException e)
+        {
             System.err.println("Could not listen on port: 4444.");
             System.exit(1);
         }
-        
-	
 
-while(true)
-	{
-        Socket clientSocket = null;
-        try {
-            clientSocket = serverSocket.accept();
-        } catch (IOException e) {
-            System.err.println("Accept failed.");
-            System.exit(1);
+        finally {
+            if(serverSocket != null) {
+                try {
+                    serverSocket.close();
+
+                } catch (IOException e) {
+                    System.out.println("Error closing server socket" + e.getMessage());
+
+                }
+            }
         }
 
-        PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-        BufferedReader in = new BufferedReader(
-				new InputStreamReader(
-				clientSocket.getInputStream()));
-        String inputLine, outputLine;
-        KnockKnockProtocol kkp = new KnockKnockProtocol();
-
-        outputLine = kkp.processInput(null);
-        out.println(outputLine);
-
-        while ((inputLine = in.readLine()) != null) {
-		if (inputLine.equals("q"))  break;
-             outputLine = kkp.processInput(inputLine);
-             out.println(outputLine);
-             
-        }
-        out.close();
-        in.close();
-        clientSocket.close();
-	}   
     }
 }
