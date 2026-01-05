@@ -1,11 +1,6 @@
 import java.util.List;
 
 public class RuppinRegistrationProtocol {
-//    private static final int q1 = 1;
-//    private static final int q2 = 2;
-//    private static final int q3 = 3;
-//    private static final int q4 = 4;
-//    private static final int q5 = 5;
 private int state=1;
 private int stateExUser=1;
 private boolean isExUser =false;
@@ -21,7 +16,7 @@ public  RuppinRegistrationProtocol(List<Client> clientList) {
 
 
     public String processInput(String theInput){
-        String theOutput=null;
+        //String theOutput=null;
         char yearOfStd;
 
         if (isExUser) {
@@ -38,28 +33,27 @@ public  RuppinRegistrationProtocol(List<Client> clientList) {
                     return "Enter a username: ";
                 } else if (theInput.equalsIgnoreCase("n")) {
                     isExUser=true;
-                    return  existingUser(theInput); // call for method.............
+                    return  existingUser(theInput); //go to the second session scenario
                 } else {
-                    return  "invalid selection!, try again" + "\n" +"Do you want to register? (y/n): ";
+                    return  "invalid selection!, Do you want to register? (y/n): ";
                 }
             case(3):
-                theOutput="Checking name...";
                 client = new Client(theInput);
                 if (clientList.contains(client)) {
-                    return theOutput += "\n" + "Name not OK. Username exists. Choose a different name: ";
+                    return "Checking name... Name not OK. Username exists. Choose a different name: ";
                 } else {
                     state++; //equal 4
-                    return theOutput+= "\n" + "OK, Enter a strong password: ";
+                    return  "Checking name... OK!. Enter a strong password: ";
 
                 }
             case (4):
                 if (client.checkPassword(theInput)) {
                     client.setPassword(theInput);
                     state++; //equal 5
-                    return "Password accepted" + "\n" + "What is your academic status? (student/teacher/other)";
+                    return "Password accepted!, What is your academic status? (student/teacher/other)";
                 }
                 else
-                    return "Password does not meet the requirements, try again";
+                    return "Password does not meet the requirements!, try again";
 
             case(5):
                 if (theInput.equalsIgnoreCase("student") || theInput.equalsIgnoreCase("teacher")
@@ -76,8 +70,21 @@ public  RuppinRegistrationProtocol(List<Client> clientList) {
                 if (theInput.length() == 1 && Character.isDigit(yearOfStd)) {
                     state = 1;
                     client.setYearsOfStd(yearOfStd);
-                    clientList.add(client); // after we're done configure the client fields we can add him to the list
-                    return "Registration complete.";
+                    //lock that block, prevent multi client insertion to the list
+                    synchronized (clientList) {
+                        if (clientList.contains(client)) {
+                            state = 3; //go back to the user picking name stage
+                            return "Username was taken during registration. Please choose a different username: ";
+                        } else {
+                            clientList.add(client); // after we're done configure the client fields we can add him to the list
+                            if (clientList.size() % 3 == 0) {
+                                RuppinRegistrationServer.saveToCSV(clientList);
+
+                            }
+                            return "Registration complete.";
+                        }
+                    }
+
 
                 } else {
                     return "invalid input, try again";
@@ -86,13 +93,10 @@ public  RuppinRegistrationProtocol(List<Client> clientList) {
 
         }
 
-
-
         // fallback – should not happen
         return "Invalid input. Please try again.";
-
-
     }
+
 
     private String existingUser(String theInput) {
        switch (stateExUser) {
@@ -105,16 +109,16 @@ public  RuppinRegistrationProtocol(List<Client> clientList) {
                    stateExUser++; //equal 3
                    return "Password: ";
                } else {
-                   return "Incorrect User\nUsername: ";
+                   return "Incorrect Username: ";
                }
            case (3):
                 refToRealClient = clientList.get(clientList.indexOf(temp));
                if (theInput.equals(refToRealClient.getPassword())) {
                    stateExUser++; //equal 4
-                   return "Welcome back, " + refToRealClient.getUserName() + "\n" + "Last time you defined yourself as" + refToRealClient.getAcademicStatus()
-                           + " for " + refToRealClient.getYearsOfStd() + ".\n" + "Do you want to update your information? (yes/no)";
+                   return "Welcome back " + refToRealClient.getUserName() + ", Last time you defined yourself as " + refToRealClient.getAcademicStatus()
+                           + " for " + refToRealClient.getYearsOfStd() + " years, Do you want to update your information? (yes/no) ";
                } else {
-                   return "Incorrect password\nPassword: ";
+                   return "Incorrect Password: ";
                }
 
            case (4):
@@ -125,7 +129,7 @@ public  RuppinRegistrationProtocol(List<Client> clientList) {
                    return "Do you want to change your username? (yes/no)";
 
                } else {
-                   return "Invalid input\nDo you want to update your information? (yes/no)";
+                   return "Invalid input, Do you want to update your information? (yes/no)";
                }
 
            case (5):
@@ -138,13 +142,13 @@ public  RuppinRegistrationProtocol(List<Client> clientList) {
                    return "Do you want to change your password? (yes/no)";
 
                } else {
-                   return "Invalid input\nDo you want to change your username? (yes/no)";
+                   return "Invalid input!. Do you want to change your username? (yes/no)";
                }
 
            case (6):
                refToRealClient.setUserName(theInput);
                stateExUser++; // equal 7
-               return "Username updated successfully.\nDo you want to change your password? (yes/no)";
+               return "Username updated successfully. Do you want to change your password? (yes/no)";
 
 
            case (7):
@@ -155,7 +159,7 @@ public  RuppinRegistrationProtocol(List<Client> clientList) {
                    stateExUser = 9;
                    return "Do you want to update your years of study? (yes/no)";
                } else {
-                   return "Invalid input\nDo you want to change your password? (yes/no)";
+                   return "Invalid input!. Do you want to change your password? (yes/no)";
                }
 
 
@@ -163,7 +167,7 @@ public  RuppinRegistrationProtocol(List<Client> clientList) {
                if (refToRealClient.checkPassword(theInput)) {
                    refToRealClient.setPassword(theInput);
                    stateExUser++; // equal 9
-                   return "Password updated successfully.\nDo you want to update your years of study? (yes/no)";
+                   return "Password updated successfully. Do you want to update your years of study? (yes/no)";
                } else {
                    return "Password does not meet the requirements, try again";
                }
@@ -175,13 +179,13 @@ public  RuppinRegistrationProtocol(List<Client> clientList) {
                } else if (theInput.equals("no")) {
                    return "Thanks, Your information has been updated.";
                } else {
-                   return "Invalid input\nDo you want to update your years of study? (yes/no)";
+                   return "Invalid input!. Do you want to update your years of study? (yes/no)";
                }
 
            case (10):
                if (theInput.length() == 1 && Character.isDigit(theInput.charAt(0))) {
                    refToRealClient.setYearsOfStd(theInput.charAt(0));
-                   return "Years of study updated successfully.\nThanks, Your information has been updated.";
+                   return "Years of study updated successfully. Thanks, Your information has been updated.";
                } else {
                    return "Invalid input, Enter number of years:";
                }

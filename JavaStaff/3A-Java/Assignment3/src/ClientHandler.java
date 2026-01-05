@@ -48,7 +48,8 @@ public class ClientHandler extends Thread {
 
                     //break from the loop and continue to close the clientSocket
                     //after the registration completed
-                    if(outputLine.equals("Registration complete.") || outputLine.equals("Thank you, bye bye")) break;
+                    if(outputLine.equals("Registration complete.") || outputLine.equals("Thank you, bye bye")
+                    || outputLine.contains("Thanks, Your information has been updated")) break;
 
 
                 }
