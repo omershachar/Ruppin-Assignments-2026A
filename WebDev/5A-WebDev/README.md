@@ -2,18 +2,21 @@
 
 - [Assignment question doc](https://docs.google.com/spreadsheets/d/190muZFteQXybb8noRH8Y0swyo946u0ghB2rAS1IJfgI/edit?gid=0#gid=0)
 
-### Real example restaurants links
+#### Real example restaurants links
+
 - [Landwer Cafe](https://www.landwercafe.co.il/)
 - [Aroma](https://www.aroma.co.il/)
 - [CafeCafe](https://www.cafecafe.co.il/he/home/a/main/)
 
-### Creative ideas
+#### Creative ideas
+
 - add a [hostages-ticker.js](https://bringthemhomenow.net/1.4.0/hostages-ticker.js)
 
 ---
 
 ### Project structure
 
+```
 5A-WebDev/
 ├── index.html (entry point)
 ├── pages/
@@ -43,5 +46,4 @@
     ├── menu-items.json
     ├── sample-orders.json
     └── README.docx
-
----
+```
