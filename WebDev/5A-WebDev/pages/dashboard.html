@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Shop - Dashboard</title>
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <div class="navbar-logo">
+                    <img src="../images/profile-images/Omer&Aviv.png" alt="Coffee Shop Logo">
+                </div>
+                <ul class="navbar-menu">
+                    <li><a href="index.html" class="navbar-link active">Dashboard</a></li>
+                    <li><a href="#" onclick="navigateToOrders(); return false;" class="navbar-link">Orders</a></li>
+                    <li><a href="#" onclick="navigateToRecharge(); return false;" class="navbar-link">Recharge</a></li>
+                    <li><a href="#" onclick="navigateToCategories(); return false;" class="navbar-link">Categories</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        
+        <header class="dashboard-header">
+            <h1 id="greeting">Hello, Guest!</h1>
+            <div id="datetime"></div>
+        </header>
+
+        <main class="dashboard-main">
+            <div class="dashboard-grid">
+                <!-- My Orders Card -->
+                <div class="dashboard-card clickable" onclick="navigateToOrders()">
+                    <div class="card-icon">📋</div>
+                    <h2>My Orders</h2>
+                    <p>View Order History</p>
+                </div>
+
+                <!-- Customer Club Status Card -->
+                <div class="dashboard-card clickable" onclick="navigateToRecharge()">
+                    <div class="card-icon">💳</div>
+                    <h2>Customer Club Status</h2>
+                    <p id="card-balance">Balance: <span id="balance-display">0</span> $</p>
+                </div>
+
+                <!-- Logo/Categories Card -->
+                <div class="dashboard-card clickable" onclick="navigateToCategories()">
+                    <div class="card-icon">☕</div>
+                    <h2>Menu</h2>
+                    <p>Choose Categories</p>
+                </div>
+
+                <!-- Histogram Card -->
+                <div class="dashboard-card">
+                    <h2>Histogram - Products Bought</h2>
+                    <div id="histogram-container">
+                        <canvas id="histogram-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../scripts/dashboard.js"></script>
+</body>
+</html>
+

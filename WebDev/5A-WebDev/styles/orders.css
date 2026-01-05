@@ -1,0 +1,44 @@
+/* Orders Page */
+.orders-container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.order-item {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.order-item:hover {
+    background: #f8f9fa;
+}
+
+.order-info {
+    flex: 1;
+}
+
+.order-item-name {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.order-item-date {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.order-item-price {
+    font-size: 1.3em;
+    color: #667eea;
+    font-weight: bold;
+}
