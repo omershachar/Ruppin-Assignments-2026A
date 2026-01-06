@@ -1,10 +1,22 @@
 body {
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
     direction: ltr;
-    padding: 1px;
+    padding: 2px;
     color: black;
-    background-color: lavenderblush;
+    background-color: rgb(240, 187, 96);
+    text-align: center;
+    box-sizing: border-box;
 }
 
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: auto;
+    font-size: medium;
+    gap: 1em;
+}
+
+/* navbar style */
 .navbar ul {
     list-style-type: none;
     background-color: hsl(0, 0%, 25%);
@@ -16,7 +28,6 @@ body {
 .navbar a {
     color: white;
     display: block;
-
     text-decoration: none;
     padding: 15px;
     text-align: center;
@@ -28,4 +39,30 @@ body {
 
 .navbar li {
     float: inline-start;
+}
+
+/* general page elements design that are inside the .container */
+.page-header {
+    background: whitesmoke;
+    padding: 10px 15px;
+    margin: 20px 5px;
+    border-radius: 15px;
+    /* font-size: 2rem; */
+    text-align: center;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+    /* grid-template-columns: 1fr 1fr; */
+    /* grid-template-rows: 1fr 1fr; */
+    gap: 1em;
+}
+
+.grid-container .card {
+    padding: 2em;
+    background-color: whitesmoke;
+    border-radius: 8px;
+    /* font-size: 2rem; */
 }
