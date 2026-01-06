@@ -10,6 +10,7 @@
 
 #### Creative ideas
 
+- [icons website](https://icons8.com/icons)
 - add a [hostages-ticker.js](https://bringthemhomenow.net/1.4.0/hostages-ticker.js)
 
 ---
