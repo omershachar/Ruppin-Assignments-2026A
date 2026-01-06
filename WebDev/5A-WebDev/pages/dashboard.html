@@ -6,67 +6,66 @@
     <title>Coffee Shop - Dashboard</title>
     <link rel="stylesheet" href="../styles/global.css">
     <link rel="stylesheet" href="../styles/dashboard.css">
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 </head>
 <body>
-    <nav class="navbar">
-        <div class="container">
-            <div class="navbar-content">
-                <div class="navbar-logo">
-                    <img src="../images/profile-images/Omer&Aviv.png" alt="Coffee Shop Logo">
-                </div>
-                <ul class="navbar-menu">
-                    <li><a href="index.html" class="navbar-link active">Dashboard</a></li>
-                    <li><a href="#" onclick="navigateToOrders(); return false;" class="navbar-link">Orders</a></li>
-                    <li><a href="#" onclick="navigateToRecharge(); return false;" class="navbar-link">Recharge</a></li>
-                    <li><a href="#" onclick="navigateToCategories(); return false;" class="navbar-link">Categories</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    
     <div class="container">
-        
+
+        <nav class="navbar">
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="orders.html">Orders</a></li>
+                <li><a href="recharge.html">Recharge</a></li>
+                <li><a href="categories.html">Categories</a></li>
+            </ul>
+        </nav>
+<hr>        
         <header class="dashboard-header">
-            <h1 id="greeting">Hello, Guest!</h1>
-            <div id="datetime"></div>
+            <h1 id="greeting">Hello, Guest! 👋</h1>
+            <div id="datetime">date</div>
         </header>
 
+        <hr>
+        
         <main class="dashboard-main">
-            <div class="dashboard-grid">
-                <!-- My Orders Card -->
-                <div class="dashboard-card clickable" onclick="navigateToOrders()">
-                    <div class="card-icon">📋</div>
-                    <h2>My Orders</h2>
-                    <p>View Order History</p>
-                </div>
+            
+            <div class="card" onclick="navigateToOrders()">
+                <h2>My Orders</h2>
+                <div class="card-icon">📋</div>
+                <p>View Order History</p>
+            </div>    
+            
+            <hr>
 
-                <!-- Customer Club Status Card -->
-                <div class="dashboard-card clickable" onclick="navigateToRecharge()">
-                    <div class="card-icon">💳</div>
+            <div class="card" onclick="navigateToRecharge()">
                     <h2>Customer Club Status</h2>
+                    <div class="card-icon">💳</div>
                     <p id="card-balance">Balance: <span id="balance-display">0</span> $</p>
-                </div>
-
-                <!-- Logo/Categories Card -->
-                <div class="dashboard-card clickable" onclick="navigateToCategories()">
-                    <div class="card-icon">☕</div>
+                </div>    
+                
+                <div class="card" onclick="navigateToCategories()">
                     <h2>Menu</h2>
+                    <div class="card-icon">🍽️</div>
                     <p>Choose Categories</p>
-                </div>
+                </div>    
 
-                <!-- Histogram Card -->
-                <div class="dashboard-card">
-                    <h2>Histogram - Products Bought</h2>
+                <hr>
+                
+                <div class="card">
+                    card
+                    <div class="card-icon">📊</div>
                     <div id="histogram-container">
+                        <h2>Histogram - Products Bought</h2>
                         <canvas id="histogram-chart"></canvas>
                     </div>
                 </div>
-            </div>
         </main>
+    
+    <hr>
+        <footer>footer here</footer>
     </div>
 
     <script src="../scripts/dashboard.js"></script>
+    <script src="../scripts/global.js"></script>
 </body>
 </html>
 
