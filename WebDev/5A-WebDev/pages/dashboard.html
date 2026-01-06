@@ -24,7 +24,7 @@
             <div id="datetime">date here</div>
         </header>
 
-        <div class="grid-container">
+        <main class="grid-container">
             
             <div class="card" onclick="navigateToOrders()">
                 <div class="card-icon">📋</div>
@@ -38,24 +38,25 @@
                 <p id="card-balance">Balance: <span id="balance-display">0</span> $</p>
             </div>    
                 
-                <div class="card" onclick="navigateToCategories()">
-                    <div class="card-icon">🍽️</div>
-                    <h2>Menu</h2>
-                    <p>Choose Categories</p>
-                </div>    
+            <div class="card" onclick="navigateToCategories()">
+                <div class="card-icon">🍽️</div>
+                <h2>Menu</h2>
+                <p>Choose Categories</p>
+            </div>    
                 
-                <div class="card">
-                    <div class="card-icon">📊</div>
-                    <div id="histogram-container">
-                        <h2>Histogram - Products Bought</h2>
-                        <canvas id="histogram-chart"></canvas>
-                    </div>
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <div id="histogram-container">
+                    <h2>Histogram - Products Bought</h2>
+                    <canvas id="histogram-chart"></canvas>
                 </div>
             </div>
 
+        </main>
+
         <hr>
         <footer>footer here</footer>
-</div>
+    </div>
 
 <hr>
     <script src="../scripts/dashboard.js"></script>
