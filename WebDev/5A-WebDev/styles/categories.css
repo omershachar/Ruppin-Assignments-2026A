@@ -9,13 +9,17 @@ body{
     grid-template-columns: 1fr;
     justify-items: center;
     row-gap: 20px;
+
 }
 
 .grid-container>div{
-    background-color: aliceblue;
     border-radius: 30px;
     width: min(90%, 600px);
-    padding: 0.5rem;
+    padding: 0.2rem;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(10px);
+
+
 }
 .grid-container>div:hover{
     box-shadow: 0 14px 50px rgba(0,0,0, 1);
