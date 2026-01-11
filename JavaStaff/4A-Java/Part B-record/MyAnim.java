@@ -9,20 +9,20 @@ import java.util.Scanner;
 
 public class MyAnim extends Canvas implements ActionListener {
 
-   String[] letters = {"I", "S"};
-   Polygon[] polygons = new Polygon[2];
-   String[] parts;
-   int xPoint, yPoint;
-   int count = 0;
-   int velX = 3, velX2 = 3;
-   int velY = 3, velY2 = 3;
-   int x = 0, x2 = 0;
-   int y = 0, y2 = 0;
-   Color polIColor = Color.blue;
-   Color polSColor = Color.CYAN;
-   double rotate = 0;
-   double scaleX = 1, scaleX2 = 1;
-   double scaleY = 1, scaleY2 = 1;
+   private String[] letters = {"I", "S"};
+   private Polygon[] polygons = new Polygon[2];
+   private String[] parts;
+   private int xPoint, yPoint;
+   private int count = 0;
+   private int velX = 3, velX2 = 3;
+   private int velY = 3, velY2 = 3;
+   private int x = 0, x2 = 0;
+   private int y = 0, y2 = 0;
+   private Color polIColor = Color.blue;
+   private Color polSColor = Color.CYAN;
+   private double rotate = 0;
+   private double scaleX = 1, scaleX2 = 1;
+   private double scaleY = 1, scaleY2 = 1;
 
 
    Timer timer = new Timer(30, this);
