@@ -57,7 +57,12 @@ public class Client {
     }
 
     public boolean isFiveDigits(String s) {
-        return false;
+        return (s.length() == 5) && (isFiveDigits(s, 0));
+    }
+
+    public boolean isFiveDigits(String s, int i) {
+        if (i == 5) {return true;}
+        else return (character.isDigit(s.charAt(i))) && isFiveDigits(s, i+1);
     }
 
 }
