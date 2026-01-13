@@ -1,0 +1,64 @@
+{
+  "Drinks": [
+    { "name": "Espresso", "price": 10, "category": "Drinks" },
+    { "name": "Cappuccino", "price": 14, "category": "Drinks" },
+    { "name": "Latte", "price": 15, "category": "Drinks" },
+    { "name": "Iced Coffee", "price": 16, "category": "Drinks" },
+    { "name": "Americano", "price": 12, "category": "Drinks" },
+    { "name": "Hot Chocolate", "price": 14, "category": "Drinks" },
+    { "name": "Green Tea", "price": 11, "category": "Drinks" }
+  ],
+
+  "Pastries": [
+    { "name": "Croissant", "price": 12, "category": "Pastries" },
+    { "name": "Chocolate Muffin", "price": 14, "category": "Pastries" },
+    { "name": "Cinnamon Roll", "price": 15, "category": "Pastries" },
+    { "name": "Cheese Danish", "price": 16, "category": "Pastries" },
+    { "name": "Apple Pie", "price": 18, "category": "Pastries" },
+    { "name": "Brownie", "price": 15, "category": "Pastries" },
+    { "name": "Almond Tart", "price": 19, "category": "Pastries" }
+  ],
+
+  "Salads": [
+    { "name": "Greek Salad", "price": 32, "category": "Salads" },
+    { "name": "Caesar Salad", "price": 36, "category": "Salads" },
+    { "name": "Quinoa Salad", "price": 38, "category": "Salads" },
+    { "name": "Tuna Salad", "price": 40, "category": "Salads" },
+    { "name": "Chicken Salad", "price": 42, "category": "Salads" },
+    { "name": "Avocado Salad", "price": 35, "category": "Salads" },
+    { "name": "Pasta Salad", "price": 34, "category": "Salads" }
+  ],
+
+  "Sandwiches": [
+    { "name": "Tuna Sandwich", "price": 34, "category": "Sandwiches" },
+    { "name": "Avocado Sandwich", "price": 32, "category": "Sandwiches" },
+    { "name": "Chicken Sandwich", "price": 38, "category": "Sandwiches" },
+    { "name": "Mozzarella Sandwich", "price": 36, "category": "Sandwiches" },
+    { "name": "Egg Salad Sandwich", "price": 30, "category": "Sandwiches" },
+    { "name": "Salmon Sandwich", "price": 42, "category": "Sandwiches" },
+    { "name": "Roasted Veggie Sandwich", "price": 33, "category": "Sandwiches" },
+ { "name": "Tuna Sandwich", "price": 34, "category": "Sandwiches" },
+ { "name": "Tuna Sandwich", "price": 34, "category": "Sandwiches" },
+ { "name": "Tuna Sandwich", "price": 34, "category": "Sandwiches" }
+  ],
+
+  "Toasts": [
+    { "name": "Cheese Toast", "price": 28, "category": "Toasts" },
+    { "name": "Mushroom Toast", "price": 32, "category": "Toasts" },
+    { "name": "Spinach Toast", "price": 30, "category": "Toasts" },
+    { "name": "Garlic Toast", "price": 26, "category": "Toasts" },
+    { "name": "Avocado Toast", "price": 34, "category": "Toasts" },
+    { "name": "Egg Toast", "price": 33, "category": "Toasts" },
+    { "name": "Tomato Mozzarella Toast", "price": 35, "category": "Toasts" }
+  ],
+
+  "Breakfasts": [
+    { "name": "Israeli Breakfast", "price": 48, "category": "Breakfasts" },
+    { "name": "Vegan Breakfast", "price": 46, "category": "Breakfasts" },
+    { "name": "Omelette Breakfast", "price": 44, "category": "Breakfasts" },
+    { "name": "Shakshuka Breakfast", "price": 42, "category": "Breakfasts" },
+    { "name": "Pancake Breakfast", "price": 40, "category": "Breakfasts" },
+    { "name": "French Toast Breakfast", "price": 43, "category": "Breakfasts" },
+    { "name": "Yogurt & Granola Breakfast", "price": 38, "category": "Breakfasts" }
+  ]
+}

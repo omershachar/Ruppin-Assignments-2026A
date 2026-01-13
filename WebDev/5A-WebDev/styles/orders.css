@@ -1,0 +1,42 @@
+body{
+    background-image: url("/images/backgroud image.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: "Segoe Script", serif;
+    text-align: center;
+    min-height: 100vh;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+}
+.container{
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border-radius: 40px;
+    width: 1200px;
+    color: rgba(70, 20, 61, 0.85);
+
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 3px solid rgba(255,255,255,0.18);
+}
+
+th {
+    position: sticky; top: 0;
+    font-size: 30px;
+    }
+
+h1{
+    color: rgba(43, 5, 38, 0.85);
+    font-weight: 500;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    font-size: 60px;
+    font-family: "Times New Roman", serif;
+}

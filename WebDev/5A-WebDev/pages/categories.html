@@ -15,32 +15,89 @@
         </header>
 
         <div class="grid-container">
-            <div>
+            <div data-category="Drinks">
                  <h2>Drinks ☕</h2>
             </div>
 
-            <div>
-                <h2>Pastries 🥐</h2>
+            <div data-category="Pastries">
+                <h2 >Pastries 🥐</h2>
             </div>
 
-            <div>
+            <div data-category="Salads">
                 <h2> Salads 🥗</h2>
             </div>
 
-            <div>
+            <div data-category="Sandwiches">
                 <h2>Sandwiches 🥪</h2>
             </div>
 
-            <div>
+            <div data-category="Toasts">
                 <h2>Toasts 🧀 </h2>
             </div>
 
-            <div>
+            <div data-category="Breakfasts">
                 <h2>Breakfasts 🍳</h2>
             </div>
         </div>
 
+    <div class="chooseFile">
+        <span>Before choosing a category, please upload the café menu file - </span>
+        <input type="file" id="fileInput" name="menuFile">
     </div>
-    <script src="../scripts/global.js"></script>
+    </div>
+    <script src="../scripts/global.js">
+    </script>
+
+<script>
+    let fileReader= new FileReader();
+    let input=document.getElementById("fileInput");
+
+    input.addEventListener("change",function () {
+
+        fileReader.readAsText(input.files[0]);//read the file as txt
+
+        //when done, add the content to the local storage
+        fileReader.onload = function() {
+            localStorage.setItem("menuFile",fileReader.result);
+        }
+
+    })
+
+    //check if file uploaded and transfer the category name to the next page
+    function transferCategory(clicked) {
+        if(localStorage.getItem("menuFile")!==null) {
+            let category= clicked.dataset.category // get the data section from the div who got clicked
+            window.location.href = `items.html?category=${category}`;// transfer the category name to item page
+        }
+        else {
+            showAlert()
+
+        }
+
+    }
+
+
+    //loop over all the category divs and add the onclick event to them
+    let categoryDivs=document.querySelectorAll(".grid-container > div");
+    for (let i = 0; i < categoryDivs.length; i++){
+        categoryDivs[i].addEventListener("click", function(){
+            transferCategory(this)
+        });
+
+    }
+
+    //showing message on the screen
+    function showAlert() {
+        let alertBox = document.createElement("div");
+        alertBox.textContent = "Unable to load menu items! please upload the menu file please";
+        alertBox.className = "miniAlert";
+
+        document.body.appendChild(alertBox);
+
+        setTimeout(function () {alertBox.remove()}, 3500);
+    }
+
+</script>
+
 </body>
 </html>

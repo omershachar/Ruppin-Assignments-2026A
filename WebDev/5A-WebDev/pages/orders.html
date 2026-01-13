@@ -3,16 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/global.css">
+   <!--// <link rel="stylesheet" href="../styles/global.css">-->
+    <link rel="stylesheet" href="../styles/orders.css">
     <title>Coffee Shop - Orders</title>
+
 </head>
 <body>
-    <div class="container">
+    <div class>
         <header class="page-header">
             <button class="back-btn" onclick="navigateToDashboard()">Back</button>
-            <h1>This is orders page</h1>
+            <h1>ORDERS</h1>
         </header>
+        <div class="container">
+
+        </div>
+
+
+
     </div>
     <script src="../scripts/global.js"></script>
+<script>
+
+    let orders= localStorage.getItem("ordersFile")
+    orders=JSON.parse(orders);
+
+    let containerDiv = document.querySelector(".container");
+    let table=document.createElement("table");
+    let tRow=document.createElement("tr");
+    let tHead=document.createElement("th");
+    let tHead2=document.createElement("th");
+    let tHead3=document.createElement("th");
+
+    if(localStorage.getItem("ordersFile")!==null){
+        containerDiv.appendChild(table).appendChild(tRow)
+        tRow.appendChild(tHead)
+        tRow.appendChild(tHead2)
+        tRow.appendChild(tHead3)
+        tHead.textContent="Name";
+        tHead2.textContent="Price";
+        tHead3.textContent="Purchase Date";
+    }
+    else {
+        let noOrders = document.createElement("span")
+        containerDiv.appendChild(noOrders)
+        noOrders.textContent="No Orders yet";
+
+    }
+
+
+
+
+    for(let i=0; i<orders.length; i++){
+
+        let tRow=document.createElement("tr");
+        let tdName=document.createElement("td");
+        let tdPrice=document.createElement("td");
+        let tdDate=document.createElement("td");
+
+
+        tdName.textContent= orders[i].name
+        tdPrice.textContent=  "$" + orders[i].price
+        tdDate.textContent=orders[i].date
+
+        table.appendChild(tRow)
+        tRow.appendChild(tdName)
+        tRow.appendChild(tdPrice)
+        tRow.appendChild(tdDate)
+
+
+
+        /*div.className="itemCard";
+        cardTitle.className="cardTitle";
+        priceTxt.className="cardPrice";
+        btn.className="cardBtn";*/
+
+    }
+
+
+
+</script>
 </body>
 </html>
