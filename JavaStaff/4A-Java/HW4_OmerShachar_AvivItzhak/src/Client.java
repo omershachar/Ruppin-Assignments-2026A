@@ -6,14 +6,12 @@ public class Client {
     private int itemType;  // 1=sunglasses, 2=belt, 3=scarf
     private int quantity;
 
-    // Constructor
     public Client(String businessName, String businessNumber, int itemType, int quantity) {
         this.businessName = businessName;
         this.businessNumber = businessNumber;
         this.itemType = itemType;
         this.quantity = quantity;
     }
-
 
     // Getters and Setters
     
@@ -49,20 +47,31 @@ public class Client {
         this.quantity = quantity;
     }
 
-
     // Helper methods
     
     public void addQuantity(int additionalQuantity) {
         this.quantity += additionalQuantity;
     }
 
-    public boolean isFiveDigits(String s) {
-        return (s.length() == 5) && (isFiveDigits(s, 0));
+    public boolean matchesByBusinessNumber(String businessNumber) {
+        return this.businessNumber.equals(businessNumber);
     }
-
-    public boolean isFiveDigits(String s, int i) {
-        if (i == 5) {return true;}
-        else return (character.isDigit(s.charAt(i))) && isFiveDigits(s, i+1);
+    
+    public boolean matchesBusinessName(String businessName) {
+        return this.businessName.equals(businessName);
     }
-
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Client client = (Client) obj;
+        return businessNumber.equals(client.businessNumber);
+    }
+    
+    @Override
+    public String toString() {
+        return "Client{" + "Name='" + businessName + '\'' + ", Number='" + businessNumber + '\'' + ", Qty=" + quantity + '}';
+    }
+    
 }
