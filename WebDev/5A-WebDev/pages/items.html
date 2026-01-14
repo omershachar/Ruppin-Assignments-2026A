@@ -75,17 +75,17 @@
         function addItemToOrdersFileKey(clicked) {
             let name = clicked.dataset.name
             let price = clicked.dataset.price
-            let date = new Date().toLocaleDateString("he-IL");
+            let date = Date.now()
             let ordersArr=[]
 
             if (localStorage.getItem("ordersFile") !== null) {
                 ordersArr = JSON.parse(localStorage.getItem("ordersFile"));
-                ordersArr.push({"name": name, "price": price, "date": date});
+                ordersArr.push({"name": name, "price": price, "createdAt": date});
                 localStorage.setItem("ordersFile", JSON.stringify(ordersArr));
 
             }
             else{
-                ordersArr.push({"name": name, "price": price, "date": date});
+                ordersArr.push({"name": name, "price": price, "createdAt": date});
                 localStorage.setItem("ordersFile", JSON.stringify(ordersArr));
             }
 

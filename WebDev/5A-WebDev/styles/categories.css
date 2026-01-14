@@ -25,8 +25,8 @@ body{
     backdrop-filter: blur(6px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 
-
 }
+
 .grid-container>div:hover{
     box-shadow: 0 14px 50px rgba(0,0,0, 1);
 }
@@ -47,7 +47,7 @@ body{
 }
 
 .chooseFile{
-    font-family: "Segoe UI", sans-serif;
+    font-family: "Times New Roman", serif;
     font-size: 1.3rem;
 
 }
