@@ -1,3 +1,15 @@
+body{
+    background-image: url("/images/backgroud image.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: "Segoe Script", serif;
+    text-align: center;
+    min-height: 100vh;
+    font-size: 20px;
+    justify-content: center;
+}
+
+
 .recharge-card {
     background: white;
     padding: 40px;
@@ -57,7 +69,7 @@
 }
 
 .btn-primary {
-    background: #667eea;
+    background: linear-gradient(90deg, #7a00ff, #fc3de6);
     color: white;
     border: none;
     padding: 15px 40px;
