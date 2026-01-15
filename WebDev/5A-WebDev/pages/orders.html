@@ -11,53 +11,15 @@
 <body>
     <div >
         <header class="page-header">
-            <button class="back-btn" onclick="navigateToDashboard()">Back</button>
+            <div class="back-arrow" onclick="navigateToDashboard()">🔙</div>
             <h1>ORDERS</h1>
-            <div class="chooseFile">
-                <span>Load order file-</span>
-                <input type="file" id="fileInput" name="ordersFile">
-            </div>
         </header>
         <div class="container">
 
         </div>
-
     </div>
     <script src="../scripts/global.js"></script>
 <script>
-
-    let fileReader= new FileReader();
-    let input=document.getElementById("fileInput");
-
-    //do if file uploaded
-    input.addEventListener("change",function () {
-
-        fileReader.readAsText(input.files[0]);//read the file as txt
-
-        //if there is already orders do
-        if (localStorage.getItem("ordersFile") !== null) {
-            let ordersArr = JSON.parse(localStorage.getItem("ordersFile"));
-            fileReader.onload = function () {
-                let fromFileArr = JSON.parse(fileReader.result);
-                for (let i = 0; i < fromFileArr.length; i++) {
-                    ordersArr.push(fromFileArr[i]);
-                }
-                ordersArr.sort(function (a, b) {
-                     return b.createdAt-a.createdAt
-                })
-                localStorage.setItem("ordersFile", JSON.stringify(ordersArr));
-                location.reload();
-            }
-        } else {
-                //when done, add the content to the local storage
-                fileReader.onload = function () {
-                    localStorage.setItem("ordersFile", fileReader.result);
-                    location.reload()
-                }
-        }
-    })
-
-
 
         let containerDiv = document.querySelector(".container");
         let table = document.createElement("table");
@@ -81,7 +43,7 @@
             tHeadNam.textContent = "Name";
             tHeadPri.textContent = "Price";
             tHeadPur.textContent = "Purchase Date";
-            document.querySelector("header > div").className = "chooseFileLeft"
+
 
 
             for (let i = 0; i < orders.length; i++) {
@@ -101,22 +63,15 @@
                 tRow.appendChild(tdPrice)
                 tRow.appendChild(tdDate)
 
-                /*div.className="itemCard";
-            cardTitle.className="cardTitle";
-            priceTxt.className="cardPrice";
-            btn.className="cardBtn";*/
-
             }
 
         } else {
-            let noOrders = document.createElement("span")
+            let noOrders = document.createElement("p")
             document.querySelector("header").appendChild(noOrders)
-            noOrders.textContent = "No Orders yet";
-            document.querySelector("header > div").className = "chooseFileCenter"
+            noOrders.textContent = "There is no orders to display";
             noOrders.className = "noOrders"
 
         }
-
 
 
         function extractDate(date) {
@@ -129,8 +84,6 @@
             let fullDate = day+'-'+month+'-'+year+' '+hour+':'+minute;
             return fullDate;
         }
-
-
 
 
 </script>

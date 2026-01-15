@@ -4,21 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coffee Shop - Dashboard</title>
+<!--
     <link rel="stylesheet" href="../styles/global.css">
+-->
     <link rel="stylesheet" href="../styles/dashboard.css">
 </head>
 <body>
     <hr>
     <div class="container">
-        <nav class="navbar">
-            <ul>
-                <li><a href="dashboard.html">Dashboard</a></li>
-                <li><a href="orders.html">Orders</a></li>
-                <li><a href="recharge.html">Recharge</a></li>
-                <li><a href="categories.html">Categories</a></li>
-            </ul>
-        </nav>
-        
         <header class="page-header">
             <h1 id="greeting-user">Hello, Guest! 👋</h1>
             <div id="datetime">date here</div>
@@ -52,15 +45,145 @@
                 </div>
             </div>
 
+            <div class="card" onclick="navigateToManagement()">
+                <div class="card-icon"></div>
+                <div>
+                    <h2>Management screen</h2>
+                    <canvas ></canvas>
+                </div>
+            </div>
+
         </main>
 
-        <hr>
-        <footer>footer here</footer>
+
+        <footer>
+            <div class="footer-container">
+                <div id="box">
+                    <div class="slide active">
+                    </div>
+                    <div class="slide"></div>
+                    <div class="slide"></div>
+                    <div class="slide">ccc</div>
+                </div>
+
+            </div>
+
+        </footer>
+
     </div>
 
-<hr>
+
     <script src="../scripts/dashboard.js"></script>
     <script src="../scripts/global.js"></script>
+<script>
+
+    let orderArr=JSON.parse(localStorage.getItem("ordersFile"))
+    let count = 0;
+    let boxDivs=document.querySelectorAll("#box .slide")
+
+    let h2LastOrder = document.createElement("h2");
+    let pLastOrder = document.createElement("p");
+    boxDivs[0].appendChild(h2LastOrder);
+    boxDivs[0].appendChild(pLastOrder);
+    boxDivs[0].classList.add("h2LO")
+
+    let h2DisplayMorder = document.createElement("h2");
+    boxDivs[1].appendChild(h2DisplayMorder);
+    boxDivs[1].classList.add("h2General")
+
+    let h2Grade = document.createElement("h2");
+    boxDivs[2].appendChild(h2Grade);
+    boxDivs[2].classList.add("h2General");
+
+    //run first time to fill the text
+    findLastOrder(h2LastOrder,pLastOrder)
+    DisplayMonthOrders(h2DisplayMorder)
+    grade(h2Grade)
+
+    setInterval(nextSlide,4000)
+
+
+    function nextSlide() {
+        switch (count) {
+            case 0:
+                findLastOrder(h2LastOrder,pLastOrder)
+                break;
+            case 1:
+                DisplayMonthOrders(h2DisplayMorder)
+                break;
+            case 2:
+                grade(h2Grade)
+                break;
+            case 3:
+
+                break;
+
+        }
+
+        boxDivs[count].classList.remove("active");
+        count++;
+        if (count === boxDivs.length) {
+            count = 0;
+        }
+        boxDivs[count].classList.add("active");
+
+    }
+
+
+    function findLastOrder(h2LastOrder,pLastOrder) {
+
+            let last = orderArr[orderArr.length - 1];
+        h2LastOrder.textContent = "Your Last Order";
+        pLastOrder.innerHTML = "Date: " + getLastOrderDate(last) + "<br>" + "Name: " + last.name + "<br>"
+                + "Price: " + "$" + last.price;
+
+    }
+
+
+    function DisplayMonthOrders(h2DisplayMorder) {
+        h2DisplayMorder.textContent = "Keep it up! You’ve made " + countOrderMonth()+ " orders this month ☕🥐" ;
+    }
+
+    function grade(h2Grade) {
+
+
+        if (countOrderMonth() > 5 && countOrderMonth() <= 10) {
+            h2Grade.textContent = "Great job! With 5+ orders, you’re now a Silver member 🥈";
+        }
+        else if (countOrderMonth() > 10) {
+            h2Grade.textContent = "Amazing! With over 10 orders, you’ve reached Gold status 🥇";
+        } else {
+            h2Grade.textContent= "Keep ordering to unlock higher membership levels! 🎉 "
+        }
+    }
+
+
+
+    function getLastOrderDate(last) {
+       let lastD=new Date(last.createdAt);
+       let day = lastD.getDate()
+        let month = lastD.getMonth();
+       let year = lastD.getFullYear();
+       let fullDate=day+'-'+month+'-'+year;
+       return fullDate;
+    }
+
+    function countOrderMonth() {
+
+        let currentDate = new Date();
+        let countOrders=0
+        for (let i = 0; i < orderArr.length; i++) {
+            if (new Date(orderArr[i].createdAt).getMonth() === currentDate.getMonth() ) {
+                countOrders++
+            }
+        }
+        return countOrders
+
+    }
+
+
+
+</script>
 </body>
 </html>
 

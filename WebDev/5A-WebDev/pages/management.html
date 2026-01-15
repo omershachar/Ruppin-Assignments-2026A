@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Management</title>
+    <link rel="stylesheet" href="../styles/management.css">
+</head>
+<body>
+
+<header>
+    <div class="back-arrow" onclick="navigateToDashboard()">🔙</div>
+    <h1> MANAGEMENT</h1>
+</header>
+
+<main>
+    <div class="container">
+        <p>Please upload menu and orders JSON files </p>
+        <input type="file" id="fileInput" accept=".json"/>
+    </div>
+</main>
+
+<script src="../scripts/global.js"></script>
+<script>
+
+
+    let input=document.getElementById("fileInput");
+
+    //waiting for a file to be uploaded
+    input.addEventListener("change",function () {
+        let fileReader= new FileReader();
+
+            fileReader.readAsText(input.files[0])//read the file as txt
+
+            //if it's a menu file
+            if (input.files[0].name.includes("menu")) {
+
+                //when done, add the content to the local storage
+                fileReader.onload = function () {
+                    localStorage.setItem("menuFile", fileReader.result);
+                };
+            }
+            //if it's a orders file
+            else {
+                if (localStorage.getItem("ordersFile") !== null){
+                    let ordersArr = JSON.parse(localStorage.getItem("ordersFile"));
+                    fileReader.onload = function () {
+                        let fromFileArr = JSON.parse(fileReader.result);
+                        for (let i = 0; i < fromFileArr.length; i++) {
+                            ordersArr.push(fromFileArr[i]);
+                        }
+                        let sortOrderArr = sortItemsByDate(ordersArr);
+                        localStorage.setItem("ordersFile", JSON.stringify(sortOrderArr));
+                    }
+                }
+                else {
+                    fileReader.onload = function () {
+                        localStorage.setItem("ordersFile", fileReader.result);
+                    };
+                }
+
+            }
+    })
+
+    function sortItemsByDate(ordersArr) {
+                ordersArr.sort(function (a, b) {
+                    return b.createdAt - a.createdAt
+                })
+        return ordersArr;
+
+            }
+
+
+</script>
+</body>
+</html>

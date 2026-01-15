@@ -39,29 +39,11 @@
                 <h2>Breakfasts 🍳</h2>
             </div>
         </div>
-
-    <div class="chooseFile">
-        <span>Before choosing a category, please upload the café menu file - </span>
-        <input type="file" id="fileInput" name="menuFile">
-    </div>
     </div>
     <script src="../scripts/global.js">
     </script>
 
 <script>
-    let fileReader= new FileReader();
-    let input=document.getElementById("fileInput");
-
-    input.addEventListener("change",function () {
-
-        fileReader.readAsText(input.files[0]);//read the file as txt
-
-        //when done, add the content to the local storage
-        fileReader.onload = function() {
-            localStorage.setItem("menuFile",fileReader.result);
-        }
-
-    })
 
     //check if file uploaded and transfer the category name to the next page
     function transferCategory(clicked) {
@@ -89,7 +71,7 @@
     //showing message on the screen
     function showAlert() {
         let alertBox = document.createElement("div");
-        alertBox.textContent = "Unable to load menu items! please upload the menu file please";
+        alertBox.textContent = "Unable to load menu items! upload the menu file please";
         alertBox.className = "miniAlert";
 
         document.body.appendChild(alertBox);

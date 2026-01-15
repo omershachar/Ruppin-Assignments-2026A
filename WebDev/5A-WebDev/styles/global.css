@@ -2,7 +2,6 @@ body {
     direction: ltr;
     font-family: Arial, Helvetica, sans-serif;
     color: black;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     line-height: 1.6;
     text-align: center;
@@ -11,7 +10,7 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1500px;
     margin: auto;
     gap: 1em;
 }
@@ -19,13 +18,17 @@ body {
 /* general page elements design that are inside the .container */
 
 .page-header {
-    background: whitesmoke;
-    padding: 10px 15px;
+
+   /* padding: 10px 15px;
     margin: 20px 5px;
     border-radius: 15px;
     font-size: 1rem;
-    box-shadow: 0 2px 4px rgb(0, 0, 0, 1);
     text-align: center;
+
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;*/
 }
 
 .grid-container {
@@ -73,3 +76,5 @@ body {
 .navbar li {
     float: inline-start;
 }
+
+
