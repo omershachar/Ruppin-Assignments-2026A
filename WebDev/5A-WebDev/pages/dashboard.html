@@ -95,10 +95,10 @@
     boxDivs[2].classList.add("h2General");
 
 
-    let orderArr=[]
+    /*let orderArr=[]
     if(localStorage.getItem("ordersFile")!==null){
         orderArr=JSON.parse(localStorage.getItem("ordersFile"))
-    }
+    }*/
 
 
     //run first time to fill the text
@@ -135,10 +135,19 @@
 
     }
 
+    function storageNull() {
+        if (localStorage.getItem("ordersFile")!==null){
+            let orderArr=JSON.parse(localStorage.getItem("ordersFile"))
+            return  orderArr
+        }
+        return null;
+    }
 
     function findLastOrder(h2LastOrder,pLastOrder) {
-        if (localStorage.getItem("ordersFile") !== null) {
+        let orderArr =storageNull()
+        if (orderArr!==null) {
             let last = orderArr[orderArr.length - 1];
+            console.log(last)
             h2LastOrder.textContent = "Your Last Order";
             pLastOrder.innerHTML = "Date: " + getLastOrderDate(last) + "<br>" + "Name: " + last.name + "<br>"
                 + "Price: " + "$" + last.price;
@@ -179,14 +188,17 @@
     }
 
     function countOrderMonth() {
-
-        let currentDate = new Date();
         let countOrders=0
-        for (let i = 0; i < orderArr.length; i++) {
-            if (new Date(orderArr[i].createdAt).getMonth() === currentDate.getMonth() ) {
-                countOrders++
+        let orderArr = storageNull()
+        if(orderArr!==null) {
+            let currentDate = new Date();
+            for (let i = 0; i < orderArr.length; i++) {
+                if (new Date(orderArr[i].createdAt).getMonth() === currentDate.getMonth() ) {
+                    countOrders++
+                }
             }
         }
+
         return countOrders
 
     }
