@@ -2,13 +2,18 @@ body{
     background-image: url("/images/backgroud image.png");
     background-repeat: no-repeat;
     background-size: cover;
-    font-family: "Segoe Script", serif;
+    font-family: "Times New Roman", serif;
     text-align: center;
     min-height: 100vh;
     font-size: 20px;
     justify-content: center;
 }
-
+.page-header h1{
+    color: rgba(43, 5, 38, 0.85);
+    font-weight: 500;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    font-size: 60px;
+}
 
 .recharge-card {
     background: white;
@@ -78,6 +83,8 @@ body{
     font-size: 1.1em;
     transition: background 0.3s;
     width: 100%;
+    font-family: "Times New Roman", serif;
+
 }
 
 .btn-primary:hover {
@@ -101,4 +108,17 @@ body{
     background: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
+}
+.back-arrow{
+    position: absolute;
+    top:20px;
+    left:20px;
+
+}
+@media (max-width: 480px) {
+    .back-arrow{
+        top:5px;
+        left:5px;
+    }
+
 }

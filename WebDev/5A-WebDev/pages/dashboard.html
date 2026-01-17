@@ -22,19 +22,19 @@
             <div class="card" onclick="navigateToOrders()">
                 <div class="card-icon">📋</div>
                 <h2>My Orders</h2>
-                <p>View Order History</p>
+               <!-- <p>View Order History</p>-->
             </div>    
             
             <div class="card" onclick="navigateToRecharge()">
                 <div class="card-icon">💳</div>
                 <h2>Customer Club Status</h2>
-                <p id="card-balance">Balance: <span id="balance-display">0</span> $</p>
+              <!--  <p id="card-balance">Balance: <span id="balance-display">0</span> $</p>-->
             </div>    
                 
             <div class="card" onclick="navigateToCategories()">
                 <div class="card-icon">🍽️</div>
                 <h2>Menu</h2>
-                <p>Choose Categories</p>
+               <!-- <p>Choose Categories</p>-->
             </div>    
                 
             <div class="card">
@@ -46,9 +46,9 @@
             </div>
 
             <div class="card" onclick="navigateToManagement()">
-                <div class="card-icon"></div>
+                <div class="card-icon"> ⚙️ </div>
                 <div>
-                    <h2>Management screen</h2>
+                    <h2>Management screen </h2>
                     <canvas ></canvas>
                 </div>
             </div>
@@ -59,11 +59,9 @@
         <footer>
             <div class="footer-container">
                 <div id="box">
-                    <div class="slide active">
-                    </div>
+                    <div class="slide active"></div>
                     <div class="slide"></div>
                     <div class="slide"></div>
-                    <div class="slide">ccc</div>
                 </div>
 
             </div>
@@ -80,51 +78,29 @@
 
     let boxDivs=document.querySelectorAll("#box .slide")
 
-    let h2LastOrder = document.createElement("h2");
-    let pLastOrder = document.createElement("p");
-    boxDivs[0].appendChild(h2LastOrder);
-    boxDivs[0].appendChild(pLastOrder);
-    boxDivs[0].classList.add("h2LO")
+    let h2DailyMess = document.createElement("h2");
+    boxDivs[0].appendChild(h2DailyMess);
+    boxDivs[0].classList.add("h2Features")
 
     let h2DisplayMorder = document.createElement("h2");
     boxDivs[1].appendChild(h2DisplayMorder);
-    boxDivs[1].classList.add("h2General")
+    boxDivs[1].classList.add("h2Features")
 
     let h2Grade = document.createElement("h2");
     boxDivs[2].appendChild(h2Grade);
-    boxDivs[2].classList.add("h2General");
+    boxDivs[2].classList.add("h2Features");
 
-
-    /*let orderArr=[]
-    if(localStorage.getItem("ordersFile")!==null){
-        orderArr=JSON.parse(localStorage.getItem("ordersFile"))
-    }*/
 
 
     //run first time to fill the text
-    findLastOrder(h2LastOrder,pLastOrder)
-    DisplayMonthOrders(h2DisplayMorder)
-    grade(h2Grade)
+    dailyMessage()
+    DisplayMonthOrders()
+    grade()
 
     setInterval(nextSlide,4000)
 
     let count = 0;
     function nextSlide() {
-        switch (count) {
-            case 0:
-                findLastOrder(h2LastOrder,pLastOrder)
-                break;
-            case 1:
-                DisplayMonthOrders(h2DisplayMorder)
-                break;
-            case 2:
-                grade(h2Grade)
-                break;
-            case 3:
-
-                break;
-
-        }
 
         boxDivs[count].classList.remove("active");
         count++;
@@ -133,6 +109,19 @@
         }
         boxDivs[count].classList.add("active");
 
+
+        switch (count) {
+            case 0:
+                dailyMessage()
+                break;
+            case 1:
+                DisplayMonthOrders()
+                break;
+            case 2:
+                grade()
+                break;
+
+        }
     }
 
     function storageNull() {
@@ -143,27 +132,28 @@
         return null;
     }
 
-    function findLastOrder(h2LastOrder,pLastOrder) {
-        let orderArr =storageNull()
-        if (orderArr!==null) {
-            let last = orderArr[orderArr.length - 1];
-            console.log(last)
-            h2LastOrder.textContent = "Your Last Order";
-            pLastOrder.innerHTML = "Date: " + getLastOrderDate(last) + "<br>" + "Name: " + last.name + "<br>"
-                + "Price: " + "$" + last.price;
-        } else {
-            h2LastOrder.textContent = "No Last Order To Display";
-        }
 
+    function dailyMessage() {
+        let nowDate = new Date();
+        let hours = nowDate.getHours()
+        if (hours < 12) {
+            h2DailyMess.textContent= "Good Morning Welcome to Our Coffee Shop!"
+        }
+        else if (hours >= 12 && hours <= 18) {
+            h2DailyMess.textContent= "Good Afternoon Welcome to Our Coffee Shop!"
+
+        }
+        else {
+            h2DailyMess.textContent= "Good Evening Welcome to Our Coffee Shop!"
+        }
 
     }
 
-
-    function DisplayMonthOrders(h2DisplayMorder) {
+    function DisplayMonthOrders() {
         h2DisplayMorder.textContent = "Keep it up! You’ve made " + countOrderMonth()+ " orders this month ☕🥐" ;
     }
 
-    function grade(h2Grade) {
+    function grade() {
 
 
         if (countOrderMonth() > 5 && countOrderMonth() <= 10) {
@@ -176,16 +166,6 @@
         }
     }
 
-
-
-    function getLastOrderDate(last) {
-       let lastD=new Date(last.createdAt);
-       let day = lastD.getDate()
-        let month = lastD.getMonth();
-       let year = lastD.getFullYear();
-       let fullDate=day+'-'+month+'-'+year;
-       return fullDate;
-    }
 
     function countOrderMonth() {
         let countOrders=0

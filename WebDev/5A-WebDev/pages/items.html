@@ -56,15 +56,17 @@
     btnList= document.querySelectorAll("button")
     for (let i = 0; i < btnList.length; i++) {
         btnList[i].addEventListener("click", function () {
-            showAlert()
-            addItemToOrdersFileKey(this)
+            if (!checkOverdraft(this)) {
+                addItemToOrdersFileKey(this);
+            }
+
         });
     }
 
         //showing message on the screen after purchase
-        function showAlert() {
+        function showAlert(message) {
             let alertBox = document.createElement("div");
-            alertBox.textContent = "Enjoy your order! Purchase successful";
+            alertBox.textContent = message;
             alertBox.className = "miniAlert";
 
             document.body.appendChild(alertBox);
@@ -90,6 +92,24 @@
             }
 
         }
+
+    function checkOverdraft(clicked) {
+        if (localStorage.getItem("cardBalance") !== null) {
+            let cardBal = JSON.parse(localStorage.getItem("cardBalance"));
+            if (cardBal - clicked.dataset.price >= 0) {
+                cardBal = cardBal - clicked.dataset.price
+                localStorage.setItem("cardBalance", JSON.stringify(cardBal));
+                showAlert("Enjoy your order! Purchase successful");
+                return false
+            } else {
+                showAlert("There is not enough money in your balance to buy this item!");
+                return true
+            }
+        } else {
+            return true;
+        }
+
+    }
 
 
 
