@@ -10,12 +10,22 @@
     <div class="container">
         <h1>Register - temp</h1>
         <button onclick="window.location.href='pages/dashboard.html'">Enter as a guest</button>
-        <form action="register.php" method="post">
-            <input type="text" name="username" placeholder="Username">
-            <input type="password" name="password" placeholder="Password">
-            <input type="submit" value="Register">
+        <form onsubmit="saveUsername(event)">
+            <input type="text" id="username-input" placeholder="Username">
+            <input type="password" placeholder="Password">
+            <button type="submit">Save Username</button>
         </form>
     </div>
-    <script src="scripts/hostages-ticker.js"></script>
+    <script src="scripts/storage.js"></script>
+    <script>
+        function saveUsername(event) {
+            event.preventDefault();
+            const username = document.getElementById('username-input').value;
+            if (username && username.trim()) {
+                setUsername(username.trim());
+                window.location.href = 'pages/dashboard.html';
+            }
+        }
+    </script>
 </body>
 </html>

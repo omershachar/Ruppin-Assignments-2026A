@@ -10,7 +10,7 @@
 
 <header>
     <div class="back-arrow" onclick="navigateToDashboard()">🔙</div>
-    <h1> MANAGEMENT</h1>
+    <h1>Management</h1>
 </header>
 
 <main>
@@ -20,6 +20,7 @@
     </div>
 </main>
 
+<script src="../scripts/storage.js"></script>
 <script src="../scripts/global.js"></script>
 <script>
 
@@ -37,28 +38,21 @@
 
                 //when done, add the content to the local storage
                 fileReader.onload = function () {
-                    localStorage.setItem("menuFile", fileReader.result);
+                    const menuData = JSON.parse(fileReader.result);
+                    setMenuFile(menuData);
                 };
             }
             //if it's a orders file
             else {
-                if (localStorage.getItem("ordersFile") !== null){
-                    let ordersArr = JSON.parse(localStorage.getItem("ordersFile"));
-                    fileReader.onload = function () {
-                        let fromFileArr = JSON.parse(fileReader.result);
-                        for (let i = 0; i < fromFileArr.length; i++) {
-                            ordersArr.push(fromFileArr[i]);
-                        }
-                        let sortOrderArr = sortItemsByDate(ordersArr);
-                        localStorage.setItem("ordersFile", JSON.stringify(sortOrderArr));
+                const existingOrders = getOrdersFile();
+                fileReader.onload = function () {
+                    let fromFileArr = JSON.parse(fileReader.result);
+                    for (let i = 0; i < fromFileArr.length; i++) {
+                        existingOrders.push(fromFileArr[i]);
                     }
+                    let sortOrderArr = sortItemsByDate(existingOrders);
+                    setOrdersFile(sortOrderArr);
                 }
-                else {
-                    fileReader.onload = function () {
-                        localStorage.setItem("ordersFile", fileReader.result);
-                    };
-                }
-
             }
     })
 

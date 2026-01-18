@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,7 +28,7 @@
             <div class="card" onclick="navigateToRecharge()">
                 <div class="card-icon">💳</div>
                 <h2>Customer Club Status</h2>
-              <!--  <p id="card-balance">Balance: <span id="balance-display">0</span> $</p>-->
+                <p id="card-balance">Balance: <span id="balance-display">0</span> $</p>
             </div>    
                 
             <div class="card" onclick="navigateToCategories()">
@@ -48,7 +48,7 @@
             <div class="card" onclick="navigateToManagement()">
                 <div class="card-icon"> ⚙️ </div>
                 <div>
-                    <h2>Management screen </h2>
+                    <h2>Management Screen</h2>
                     <canvas ></canvas>
                 </div>
             </div>
@@ -71,6 +71,8 @@
     </div>
 
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../scripts/storage.js"></script>
     <script src="../scripts/dashboard.js"></script>
     <script src="../scripts/global.js"></script>
 <script>

@@ -12,12 +12,13 @@
     <div >
         <header class="page-header">
             <div class="back-arrow" onclick="navigateToDashboard()">🔙</div>
-            <h1>ORDERS</h1>
+            <h1>Orders</h1>
         </header>
         <div class="container">
 
         </div>
     </div>
+    <script src="../scripts/storage.js"></script>
     <script src="../scripts/global.js"></script>
 <script>
 
@@ -31,6 +32,16 @@
         if (localStorage.getItem("ordersFile") !== null) {
             let orders = localStorage.getItem("ordersFile")
             orders = JSON.parse(orders);
+
+            // Filter orders since today
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const todayTimestamp = today.getTime();
+            
+            orders = orders.filter(order => {
+                const orderDate = new Date(order.createdAt);
+                return orderDate >= today;
+            });
 
             orders.sort(function (a, b) {
                 return b.createdAt-a.createdAt
@@ -68,7 +79,7 @@
         } else {
             let noOrders = document.createElement("p")
             document.querySelector("header").appendChild(noOrders)
-            noOrders.textContent = "There is no orders to display";
+            noOrders.textContent = "There are no orders to display";
             noOrders.className = "noOrders"
 
         }

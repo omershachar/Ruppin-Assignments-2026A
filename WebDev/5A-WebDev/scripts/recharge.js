@@ -4,8 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Update recharge page with current balance
 function updateRechargePage() {
-    const balance = parseFloat(localStorage.getItem('cardBalance') || '0');
-    document.getElementById('current-balance').textContent = balance.toFixed(2) + ' $';
+    const balance = getCardBalance();
+    const balanceElement = document.getElementById('current-balance');
+    if (balanceElement) {
+        balanceElement.textContent = balance.toFixed(2) + ' $';
+    }
 }
 
 // Recharge card
@@ -17,16 +20,12 @@ function rechargeCard() {
     // Validate input
     if (!amount || amount <= 0) {
         messageDiv.className = 'message error';
-        messageDiv.textContent = 'please enter a valid value';
+        messageDiv.textContent = 'Please enter a valid value';
         return;
     }
     
-    // Get current balance
-    const currentBalance = parseFloat(localStorage.getItem('cardBalance') || '0');
-    const newBalance = currentBalance + amount;
-    
-    // Update balance in LocalStorage
-    localStorage.setItem('cardBalance', newBalance.toFixed(2));
+    // Add amount to balance using storage.js function
+    const newBalance = addToCardBalance(amount);
     
     // Update display
     updateRechargePage();

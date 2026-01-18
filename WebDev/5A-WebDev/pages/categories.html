@@ -11,7 +11,7 @@
 <div >
         <header >
             <div class="back-arrow" onclick="navigateToDashboard()">🔙</div>
-            <span class="title"> MENU </span>
+            <span class="title">Menu</span>
         </header>
 
         <div class="grid-container">
@@ -40,6 +40,7 @@
             </div>
         </div>
     </div>
+    <script src="../scripts/storage.js"></script>
     <script src="../scripts/global.js">
     </script>
 
@@ -47,7 +48,7 @@
 
     //check if file uploaded and transfer the category name to the next page
     function transferCategory(clicked) {
-        if(localStorage.getItem("menuFile")!==null) {
+        if(getMenuFile() !== null) {
             let category= clicked.dataset.category // get the data section from the div who got clicked
             window.location.href = `items.html?category=${category}`;// transfer the category name to item page
         }

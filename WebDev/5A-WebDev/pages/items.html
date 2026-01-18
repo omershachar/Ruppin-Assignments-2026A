@@ -11,13 +11,12 @@
 
     <div class="container"></div>
 
-
+<script src="../scripts/storage.js"></script>
 <script>
 
     let params = new URLSearchParams(window.location.search);
     let category = params.get("category"); //get the category name from the URL
-    let menuItem= localStorage.getItem("menuFile")
-    menuItem=JSON.parse(menuItem);
+    let menuItem = getMenuFile();
 
     let container = document.querySelector(".container");
     let pageTitle = document.createElement("h1")
@@ -76,39 +75,24 @@
 
         function addItemToOrdersFileKey(clicked) {
             let name = clicked.dataset.name
-            let price = clicked.dataset.price
+            let price = parseFloat(clicked.dataset.price)
             let date = Date.now()
-            let ordersArr=[]
-
-            if (localStorage.getItem("ordersFile") !== null) {
-                ordersArr = JSON.parse(localStorage.getItem("ordersFile"));
-                ordersArr.push({"name": name, "price": price, "createdAt": date});
-                localStorage.setItem("ordersFile", JSON.stringify(ordersArr));
-
-            }
-            else{
-                ordersArr.push({"name": name, "price": price, "createdAt": date});
-                localStorage.setItem("ordersFile", JSON.stringify(ordersArr));
-            }
-
+            
+            const order = {"name": name, "price": price, "createdAt": date};
+            addOrder(order);
         }
 
     function checkOverdraft(clicked) {
-        if (localStorage.getItem("cardBalance") !== null) {
-            let cardBal = JSON.parse(localStorage.getItem("cardBalance"));
-            if (cardBal - clicked.dataset.price >= 0) {
-                cardBal = cardBal - clicked.dataset.price
-                localStorage.setItem("cardBalance", JSON.stringify(cardBal));
-                showAlert("Enjoy your order! Purchase successful");
-                return false
-            } else {
-                showAlert("There is not enough money in your balance to buy this item!");
-                return true
-            }
+        const price = parseFloat(clicked.dataset.price);
+        const newBalance = deductFromCardBalance(price);
+        
+        if (newBalance !== null) {
+            showAlert("Enjoy your order! Purchase successful");
+            return false;
         } else {
+            showAlert("There is not enough money in your balance to buy this item!");
             return true;
         }
-
     }
 
 
