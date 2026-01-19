@@ -1,40 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coffee Shop - Dashboard</title>
-<!--
-    <link rel="stylesheet" href="../styles/global.css">
--->
     <link rel="stylesheet" href="../styles/dashboard.css">
 </head>
 <body>
-    <hr>
     <div class="container">
         <header class="page-header">
-            <h1 id="greeting-user">Hello, Guest! 👋</h1>
-            <div id="datetime">date here</div>
+            <h1 id="greeting-user"></h1>
+            <div id="datetime"></div>
         </header>
 
         <main class="grid-container">
-            
             <div class="card" onclick="navigateToOrders()">
                 <div class="card-icon">📋</div>
                 <h2>My Orders</h2>
-               <!-- <p>View Order History</p>-->
             </div>    
             
             <div class="card" onclick="navigateToRecharge()">
                 <div class="card-icon">💳</div>
                 <h2>Customer Club Status</h2>
-                <p id="card-balance">Balance: <span id="balance-display">0</span> $</p>
+              <p id="card-balance">Balance: <span id="balance-display">0</span> $</p>
             </div>    
                 
             <div class="card" onclick="navigateToCategories()">
                 <div class="card-icon">🍽️</div>
                 <h2>Menu</h2>
-               <!-- <p>Choose Categories</p>-->
             </div>    
                 
             <div class="card">
@@ -48,7 +41,7 @@
             <div class="card" onclick="navigateToManagement()">
                 <div class="card-icon"> ⚙️ </div>
                 <div>
-                    <h2>Management Screen</h2>
+                    <h2>Management screen </h2>
                     <canvas ></canvas>
                 </div>
             </div>
@@ -70,124 +63,10 @@
 
     </div>
 
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../scripts/storage.js"></script>
-    <script src="../scripts/dashboard.js"></script>
     <script src="../scripts/global.js"></script>
-<script>
+    <script src="../scripts/dashboard.js"></script>
 
-
-    let boxDivs=document.querySelectorAll("#box .slide")
-
-    let h2DailyMess = document.createElement("h2");
-    boxDivs[0].appendChild(h2DailyMess);
-    boxDivs[0].classList.add("h2Features")
-
-    let h2DisplayMorder = document.createElement("h2");
-    boxDivs[1].appendChild(h2DisplayMorder);
-    boxDivs[1].classList.add("h2Features")
-
-    let h2Grade = document.createElement("h2");
-    boxDivs[2].appendChild(h2Grade);
-    boxDivs[2].classList.add("h2Features");
-
-
-
-    //run first time to fill the text
-    dailyMessage()
-    DisplayMonthOrders()
-    grade()
-
-    setInterval(nextSlide,4000)
-
-    let count = 0;
-    function nextSlide() {
-
-        boxDivs[count].classList.remove("active");
-        count++;
-        if (count === boxDivs.length) {
-            count = 0;
-        }
-        boxDivs[count].classList.add("active");
-
-
-        switch (count) {
-            case 0:
-                dailyMessage()
-                break;
-            case 1:
-                DisplayMonthOrders()
-                break;
-            case 2:
-                grade()
-                break;
-
-        }
-    }
-
-    function storageNull() {
-        if (localStorage.getItem("ordersFile")!==null){
-            let orderArr=JSON.parse(localStorage.getItem("ordersFile"))
-            return  orderArr
-        }
-        return null;
-    }
-
-
-    function dailyMessage() {
-        let nowDate = new Date();
-        let hours = nowDate.getHours()
-        if (hours < 12) {
-            h2DailyMess.textContent= "Good Morning Welcome to Our Coffee Shop!"
-        }
-        else if (hours >= 12 && hours <= 18) {
-            h2DailyMess.textContent= "Good Afternoon Welcome to Our Coffee Shop!"
-
-        }
-        else {
-            h2DailyMess.textContent= "Good Evening Welcome to Our Coffee Shop!"
-        }
-
-    }
-
-    function DisplayMonthOrders() {
-        h2DisplayMorder.textContent = "Keep it up! You’ve made " + countOrderMonth()+ " orders this month ☕🥐" ;
-    }
-
-    function grade() {
-
-
-        if (countOrderMonth() > 5 && countOrderMonth() <= 10) {
-            h2Grade.textContent = "Great job! With 5+ orders, you’re now a Silver member 🥈";
-        }
-        else if (countOrderMonth() > 10) {
-            h2Grade.textContent = "Amazing! With over 10 orders, you’ve reached Gold status 🥇";
-        } else {
-            h2Grade.textContent= "Keep ordering to unlock higher membership levels! 🎉 "
-        }
-    }
-
-
-    function countOrderMonth() {
-        let countOrders=0
-        let orderArr = storageNull()
-        if(orderArr!==null) {
-            let currentDate = new Date();
-            for (let i = 0; i < orderArr.length; i++) {
-                if (new Date(orderArr[i].createdAt).getMonth() === currentDate.getMonth() ) {
-                    countOrders++
-                }
-            }
-        }
-
-        return countOrders
-
-    }
-
-
-
-</script>
 </body>
 </html>
 

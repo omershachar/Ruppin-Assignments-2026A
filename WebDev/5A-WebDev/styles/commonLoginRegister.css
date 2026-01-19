@@ -1,39 +1,67 @@
-body {
+body{
     background-image: url("../images/background.png");
     background-repeat: no-repeat;
     background-size: cover;
     font-family: "Segoe Script", serif;
     text-align: center;
     min-height: 100vh;
-
+    margin: 0;
 }
+
 .container{
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     justify-content: center;
-    min-height: 100vh;
-    gap:28px;
+    align-items: center;
+    min-height: 70vh;
+
 }
 
-.itemCard{
+
+
+.pageTitle{
+    color: rgba(43, 5, 38, 0.85);
+    font-weight: 500;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    font-size: 60px;
+    font-family: "Times New Roman", serif;
+    margin-bottom: 20px;
+}
+
+.cardTitle{
+    font-weight: lighter;
+    color: rgba(70, 20, 61, 0.85);
+}
+
+
+
+.glassCard{
     display: flex;
     flex-direction: column;
-    padding:20px;
+    align-items: center;
+    width: 500px;
+    padding: 28px;
     border-radius: 30px;
-    justify-content: space-between;
-    height: 220px;
-    width: 20%;
+    gap: 16px;
     background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(6px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
 
+
+
+.inputField{
+    padding: 12px;
+    border-radius: 14px;
+    border: none;
+    outline: none;
+    width: 260px;
+    font-size: 14px;
+    font-family: "Times New Roman", serif;
+    background: rgba(255,255,255,0.85);
 }
-.itemCard:hover{
-    transform: translateY(-6px);
-    box-shadow: 0 18px 40px rgba(0,0,0,0.25);
-}
+
+
+
 .cardBtn{
     padding: 10px 24px;
     border: none;
@@ -43,33 +71,20 @@ body {
     cursor: pointer;
     background: linear-gradient(90deg, #7a00ff, #fc3de6);
     box-shadow: 0 6px 18px rgba(122, 0, 255, 0.4);
+    width: 200px;
     height: 36px;
     font-size: 14px;
 }
+
 .cardBtn:hover{
     box-shadow: 0 14px 50px rgba(0,0,0, 1);
 }
 
-.cardPrice{
-    font-size: 30px;
-}
 
-.cardTitle{
-    font-weight: lighter;
-    color: rgba(70, 20, 61, 0.85);
-}
-
-.pageTitle{
-    color: rgba(43, 5, 38, 0.85);
-    font-weight: 500;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
-    font-size: 60px;
-    font-family: "Times New Roman", serif;
-}
 
 .miniAlert{
     position: fixed;
-    bottom: 350px;
+    bottom: 180px;
     left: 50%;
     transform: translateX(-50%);
     padding: 10px 20px;
@@ -79,32 +94,21 @@ body {
     border-radius: 14px;
     font-size: 14px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    opacity: 1;
     z-index: 9999;
 }
 
-.back-arrow{
-    position: absolute;
-    top:20px;
-    left:20px;
-
-}
 
 @media(max-width:480px) {
-    .cardTitle {
-        font-size: 15px
-    }
-    .cardPrice{
-        font-size: 18px;
-
-    }
-    .itemCard{
-        height: 180px;
+    .pageTitle{
+        font-size: 42px;
     }
 
-    .back-arrow{
-        top:5px;
-        left:5px;
+    .glassCard{
+        width: 70%;
+
     }
 
+    .miniAlert{
+        bottom: 80px;
+    }
 }

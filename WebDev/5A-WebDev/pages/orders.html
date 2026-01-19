@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../styles/orders.css">
     <title>Coffee Shop - Orders</title>
 
+
 </head>
 <body>
     <div >
@@ -18,85 +19,9 @@
 
         </div>
     </div>
-    <script src="../scripts/storage.js"></script>
-    <script src="../scripts/global.js"></script>
-<script>
 
-        let containerDiv = document.querySelector(".container");
-        let table = document.createElement("table");
-        let tRow = document.createElement("tr");
-        let tHeadNam = document.createElement("th");
-        let tHeadPri = document.createElement("th");
-        let tHeadPur = document.createElement("th");
+  <script src="../scripts/global.js"></script>
+ <script src="../scripts/orders.js"></script>
 
-        if (localStorage.getItem("ordersFile") !== null) {
-            let orders = localStorage.getItem("ordersFile")
-            orders = JSON.parse(orders);
-
-            // Filter orders since today
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            const todayTimestamp = today.getTime();
-            
-            orders = orders.filter(order => {
-                const orderDate = new Date(order.createdAt);
-                return orderDate >= today;
-            });
-
-            orders.sort(function (a, b) {
-                return b.createdAt-a.createdAt
-            })
-
-            containerDiv.appendChild(table).appendChild(tRow)
-            tRow.appendChild(tHeadNam)
-            tRow.appendChild(tHeadPri)
-            tRow.appendChild(tHeadPur)
-            tHeadNam.textContent = "Name";
-            tHeadPri.textContent = "Price";
-            tHeadPur.textContent = "Purchase Date";
-
-
-
-            for (let i = 0; i < orders.length; i++) {
-
-                let tRow = document.createElement("tr");
-                let tdName = document.createElement("td");
-                let tdPrice = document.createElement("td");
-                let tdDate = document.createElement("td");
-
-
-                tdName.textContent = orders[i].name
-                tdPrice.textContent = "$" + orders[i].price
-                tdDate.textContent = extractDate(orders[i].createdAt)
-
-                table.appendChild(tRow)
-                tRow.appendChild(tdName)
-                tRow.appendChild(tdPrice)
-                tRow.appendChild(tdDate)
-
-            }
-
-        } else {
-            let noOrders = document.createElement("p")
-            document.querySelector("header").appendChild(noOrders)
-            noOrders.textContent = "There are no orders to display";
-            noOrders.className = "noOrders"
-
-        }
-
-
-        function extractDate(date) {
-            let newDate=new Date(date);
-            let day = newDate.getDate()
-            let month = newDate.getMonth() + 1;
-            let year = newDate.getFullYear();
-            let hour = newDate.getHours();
-            let minute = newDate.getMinutes();
-            let fullDate = day+'-'+month+'-'+year+' '+hour+':'+minute;
-            return fullDate;
-        }
-
-
-</script>
 </body>
 </html>

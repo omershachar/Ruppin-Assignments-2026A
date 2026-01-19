@@ -1,96 +1,183 @@
-// Dashboard functionality
-// Update username greeting and date/time display
-function updateDashboardHeader() {
-    const username = getUsername();
-    const greetingElement = document.getElementById('greeting-user');
-    if (greetingElement) {
-        greetingElement.textContent = `Hello, ${username}! 👋`;
+// Show greeting message and date based on URL parameter
+greetingUser();
+
+// Select all slide elements inside #box
+let boxDivs = document.querySelectorAll("#box .slide");
+
+// Create h2 for daily message slide
+let h2DailyMess = document.createElement("h2");
+boxDivs[0].appendChild(h2DailyMess);
+boxDivs[0].classList.add("h2Features"); // styling class
+
+// Create h2 for monthly orders slide
+let h2DisplayMorder = document.createElement("h2");
+boxDivs[1].appendChild(h2DisplayMorder);
+boxDivs[1].classList.add("h2Features");
+
+// Create h2 for membership grade slide
+let h2Grade = document.createElement("h2");
+boxDivs[2].appendChild(h2Grade);
+boxDivs[2].classList.add("h2Features");
+
+// Display card balance from localStorage
+getBalance();
+
+// Create histogram chart
+createHistogram();
+
+// Initial content fill before slider starts
+dailyMessage();
+DisplayMonthOrders();
+grade();
+
+// Automatically switch slides every 4 seconds
+setInterval(nextSlide, 4000);
+
+// Keeps track of current slide index
+let count = 0;
+
+function nextSlide() {
+
+    // Remove active class from current slide
+    boxDivs[count].classList.remove("active");
+
+    // Move to next slide
+    count++;
+
+    // If reached the end, go back to first slide
+    if (count === boxDivs.length) {
+        count = 0;
     }
-    
-    // Update date and time
-    const datetimeElement = document.getElementById('datetime');
-    if (datetimeElement) {
-        const now = new Date();
-        const dateStr = now.toLocaleDateString();
-        const timeStr = now.toLocaleTimeString();
-        datetimeElement.textContent = `${dateStr} ${timeStr}`;
+
+    // Activate the new slide
+    boxDivs[count].classList.add("active");
+
+    // Update content based on active slide
+    switch (count) {
+        case 0:
+            dailyMessage(); // update greeting message
+            break;
+        case 1:
+            DisplayMonthOrders(); // update monthly orders message
+            break;
+        case 2:
+            grade(); // update membership grade
+            break;
     }
-    
-    // Update balance display
-    const balanceDisplay = document.getElementById('balance-display');
-    if (balanceDisplay) {
-        const balance = getCardBalance();
-        balanceDisplay.textContent = balance.toFixed(2);
+}
+
+// Returns orders array from localStorage or null if not exists
+function storageNull() {
+    if (localStorage.getItem("ordersFile") !== null) {
+        let orderArr = JSON.parse(localStorage.getItem("ordersFile"));
+        return orderArr;
     }
+    return null;
+}
+
+// Display greeting message based on current hour
+function dailyMessage() {
+    let nowDate = new Date();
+    let hours = nowDate.getHours();
+
+    if (hours < 12) {
+        h2DailyMess.textContent = "Good Morning Welcome to Our Coffee Shop!";
+    }
+    else if (hours >= 12 && hours <= 18) {
+        h2DailyMess.textContent = "Good Afternoon Welcome to Our Coffee Shop!";
+    }
+    else {
+        h2DailyMess.textContent = "Good Evening Welcome to Our Coffee Shop!";
+    }
+}
+
+// Display number of orders made this month
+function DisplayMonthOrders() {
+    h2DisplayMorder.textContent =
+        "Keep it up! You’ve made " + countOrderMonth() + " orders this month ☕🥐";
+}
+
+// Display membership grade based on number of monthly orders
+function grade() {
+
+    if (countOrderMonth() > 5 && countOrderMonth() <= 10) {
+        h2Grade.textContent = "Great job! With 5+ orders, you’re now a Silver member 🥈";
+    }
+    else if (countOrderMonth() > 10) {
+        h2Grade.textContent = "Amazing! With over 10 orders, you’ve reached Gold status 🥇";
+    }
+    else {
+        h2Grade.textContent = "Keep ordering to unlock higher membership levels! 🎉";
+    }
+}
+
+// Count how many orders were made in the current month
+function countOrderMonth() {
+    let countOrders = 0;
+    let orderArr = storageNull();
+
+    if (orderArr !== null) {
+        let currentDate = new Date();
+
+        for (let i = 0; i < orderArr.length; i++) {
+            // Compare order month with current month
+            if (new Date(orderArr[i].createdAt).getMonth() === currentDate.getMonth()) {
+                countOrders++;
+            }
+        }
+    }
+
+    return countOrders;
+}
+
+// Display card balance from localStorage
+function getBalance() {
+    if (localStorage.getItem("cardBalance") !== null) {
+        let cardBalance = JSON.parse(localStorage.getItem("cardBalance"));
+        document.getElementById("balance-display").textContent = cardBalance;
+    }
+    else {
+        document.getElementById("balance-display").textContent = '0';
+    }
+}
+
+// Get username from URL and display greeting and date
+function greetingUser() {
+    let params = new URLSearchParams(window.location.search);
+    let userName = params.get("user"); // get user name from URL
+
+    if (userName !== null) {
+        localStorage.setItem("currentUser", userName);
+    }
+    // Otherwise, get user from localStorage
+else {
+        userName = localStorage.getItem("currentUser");
+    }
+
+    document.getElementById("greeting-user").textContent = "Hello " + userName;
+
+    let nowDate = new Date();
+    document.getElementById("datetime").textContent =
+        nowDate.toLocaleDateString("he-IL"); // display date in Israeli format
 }
 
 // Create histogram chart showing products bought since today
-function createHistogramChart() {
-    const canvas = document.getElementById('histogram-chart');
-    if (!canvas) return;
+function createHistogram() {
+    let orders = storageNull();
+    if (!orders) return;
     
-    const orders = getOrdersFile();
-    if (!orders || orders.length === 0) {
-        return;
-    }
-    
-    // Filter orders since today
-    const today = new Date();
+    let today = new Date();
     today.setHours(0, 0, 0, 0);
-    const todayTimestamp = today.getTime();
     
-    const todayOrders = orders.filter(order => {
-        const orderDate = new Date(order.createdAt);
-        return orderDate >= today;
-    });
+    let todayOrders = orders.filter(o => new Date(o.createdAt) >= today);
+    let counts = {};
+    todayOrders.forEach(o => counts[o.name] = (counts[o.name] || 0) + 1);
     
-    if (todayOrders.length === 0) {
-        return;
-    }
-    
-    // Count products by name
-    const productCounts = {};
-    todayOrders.forEach(order => {
-        productCounts[order.name] = (productCounts[order.name] || 0) + 1;
-    });
-    
-    // Prepare chart data
-    const labels = Object.keys(productCounts);
-    const data = Object.values(productCounts);
-    
-    // Create chart
-    new Chart(canvas, {
+    new Chart(document.getElementById('histogram-chart'), {
         type: 'bar',
         data: {
-            labels: labels,
-            datasets: [{
-                label: 'Quantity',
-                data: data,
-                backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        stepSize: 1
-                    }
-                }
-            }
+            labels: Object.keys(counts),
+            datasets: [{ label: 'Quantity', data: Object.values(counts) }]
         }
     });
 }
-
-// Initialize dashboard when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    initializeStorage();
-    updateDashboardHeader();
-    createHistogramChart();
-    
-    // Update time every minute
-    setInterval(updateDashboardHeader, 60000);
-});

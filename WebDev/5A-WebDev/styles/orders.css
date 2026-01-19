@@ -1,5 +1,5 @@
 body{
-    background-image: url("/images/backgroud image.png");
+    background-image: url("../images/background.png");
     background-repeat: no-repeat;
     background-size: cover;
     font-family: "Segoe Script", serif;

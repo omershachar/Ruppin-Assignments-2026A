@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Management</title>
     <link rel="stylesheet" href="../styles/management.css">
+
 </head>
 <body>
 
 <header>
     <div class="back-arrow" onclick="navigateToDashboard()">🔙</div>
-    <h1>Management</h1>
+    <h1> Management</h1>
 </header>
 
 <main>
@@ -20,51 +21,7 @@
     </div>
 </main>
 
-<script src="../scripts/storage.js"></script>
 <script src="../scripts/global.js"></script>
-<script>
-
-
-    let input=document.getElementById("fileInput");
-
-    //waiting for a file to be uploaded
-    input.addEventListener("change",function () {
-        let fileReader= new FileReader();
-
-            fileReader.readAsText(input.files[0])//read the file as txt
-
-            //if it's a menu file
-            if (input.files[0].name.includes("menu")) {
-
-                //when done, add the content to the local storage
-                fileReader.onload = function () {
-                    const menuData = JSON.parse(fileReader.result);
-                    setMenuFile(menuData);
-                };
-            }
-            //if it's a orders file
-            else {
-                const existingOrders = getOrdersFile();
-                fileReader.onload = function () {
-                    let fromFileArr = JSON.parse(fileReader.result);
-                    for (let i = 0; i < fromFileArr.length; i++) {
-                        existingOrders.push(fromFileArr[i]);
-                    }
-                    let sortOrderArr = sortItemsByDate(existingOrders);
-                    setOrdersFile(sortOrderArr);
-                }
-            }
-    })
-
-    function sortItemsByDate(ordersArr) {
-                ordersArr.sort(function (a, b) {
-                    return b.createdAt - a.createdAt
-                })
-        return ordersArr;
-
-            }
-
-
-</script>
+<script src="../scripts/management.js"></script>
 </body>
 </html>

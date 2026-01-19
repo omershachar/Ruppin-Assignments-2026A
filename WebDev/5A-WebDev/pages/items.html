@@ -8,95 +8,10 @@
 
 </head>
 <body>
-
+<div class="back-arrow" onclick="navigateToCategories()">🔙</div>
     <div class="container"></div>
 
-<script src="../scripts/storage.js"></script>
-<script>
-
-    let params = new URLSearchParams(window.location.search);
-    let category = params.get("category"); //get the category name from the URL
-    let menuItem = getMenuFile();
-
-    let container = document.querySelector(".container");
-    let pageTitle = document.createElement("h1")
-    document.body.prepend(pageTitle)//add to the top of the body
-    pageTitle.textContent=category
-    pageTitle.setAttribute("class","pageTitle")
-
-    //loop that create the items cards from the localStorage file dynamically
-    for(let i=0; i<menuItem[category].length; i++){
-        let div = document.createElement("div");
-        let cardTitle = document.createElement("h1");
-        let priceTxt = document.createElement("span");
-        let btn = document.createElement("button");
-
-        cardTitle.textContent=menuItem[category][i].name
-        priceTxt.textContent="$" + menuItem[category][i].price
-        btn.textContent="Buy"
-
-        //add the name and the price of the item to the data section on the btn
-        btn.dataset.name=menuItem[category][i].name
-        btn.dataset.price=menuItem[category][i].price
-
-        container.appendChild(div);
-        div.appendChild(cardTitle);
-        div.appendChild(priceTxt);
-        div.appendChild(btn);
-
-        div.className="itemCard";
-        cardTitle.className="cardTitle";
-        priceTxt.className="cardPrice";
-        btn.className="cardBtn";
-
-    }
-
-    //add the function showAlert to every btn
-    btnList= document.querySelectorAll("button")
-    for (let i = 0; i < btnList.length; i++) {
-        btnList[i].addEventListener("click", function () {
-            if (!checkOverdraft(this)) {
-                addItemToOrdersFileKey(this);
-            }
-
-        });
-    }
-
-        //showing message on the screen after purchase
-        function showAlert(message) {
-            let alertBox = document.createElement("div");
-            alertBox.textContent = message;
-            alertBox.className = "miniAlert";
-
-            document.body.appendChild(alertBox);
-
-            setTimeout(function () {alertBox.remove()},2000);
-        }
-
-        function addItemToOrdersFileKey(clicked) {
-            let name = clicked.dataset.name
-            let price = parseFloat(clicked.dataset.price)
-            let date = Date.now()
-            
-            const order = {"name": name, "price": price, "createdAt": date};
-            addOrder(order);
-        }
-
-    function checkOverdraft(clicked) {
-        const price = parseFloat(clicked.dataset.price);
-        const newBalance = deductFromCardBalance(price);
-        
-        if (newBalance !== null) {
-            showAlert("Enjoy your order! Purchase successful");
-            return false;
-        } else {
-            showAlert("There is not enough money in your balance to buy this item!");
-            return true;
-        }
-    }
-
-
-
-</script>
+<script src="../scripts/global.js"></script>
+<script src="../scripts/items.js"></script>
 </body>
 </html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles/commonLoginRegister.css">
+
+</head>
+
+<body>
+<h1 class="pageTitle">Register</h1>
+
+<div class="container">
+
+    <div class="glassCard registerCard">
+
+        <h2 class="cardTitle">Create Account</h2>
+        <input class="inputField" type="text" id="fullName" placeholder="Full Name">
+        <input class="inputField" type="text" id="email" placeholder="Email">
+        <input class="inputField" type="password" id="password" placeholder="Password (min 8 characters)">
+        <input class="inputField" type="password" id="confirmPassword" placeholder="Confirm Password">
+
+        <button class="cardBtn" onclick="register()">Register</button>
+        <button class="cardBtn secondaryBtn" onclick="goToLogin()">Back to Login</button>
+    </div>
+</div>
+
+<script src="../scripts/registration.js"></script>
+
+</body>
+</html>
