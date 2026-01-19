@@ -22,8 +22,12 @@ boxDivs[2].classList.add("h2Features");
 // Display card balance from localStorage
 getBalance();
 
-// Create histogram chart
-createHistogram();
+// Create histogram chart after DOM loads
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', createHistogram);
+} else {
+    createHistogram();
+}
 
 // Initial content fill before slider starts
 dailyMessage();
@@ -173,11 +177,51 @@ function createHistogram() {
     let counts = {};
     todayOrders.forEach(o => counts[o.name] = (counts[o.name] || 0) + 1);
     
-    new Chart(document.getElementById('histogram-chart'), {
+    if (Object.keys(counts).length === 0) return;
+    
+    const chartCanvas = document.getElementById('histogram-chart');
+    const container = document.getElementById('histogram-container');
+    
+    new Chart(chartCanvas, {
         type: 'bar',
         data: {
             labels: Object.keys(counts),
-            datasets: [{ label: 'Quantity', data: Object.values(counts) }]
+            datasets: [{ 
+                label: 'Quantity', 
+                data: Object.values(counts),
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    top: 10,
+                    bottom: 10,
+                    left: 10,
+                    right: 10
+                }
+            },
+            plugins: {
+                legend: { 
+                    labels: { color: '#000' },
+                    display: true
+                }
+            },
+            scales: {
+                x: { 
+                    ticks: { color: '#000', maxRotation: 45, minRotation: 0 },
+                    grid: { color: 'rgba(0,0,0,0.1)' }
+                },
+                y: { 
+                    beginAtZero: true, 
+                    ticks: { color: '#000', stepSize: 1 }, 
+                    grid: { color: 'rgba(0,0,0,0.1)' } 
+                }
+            }
         }
     });
 }

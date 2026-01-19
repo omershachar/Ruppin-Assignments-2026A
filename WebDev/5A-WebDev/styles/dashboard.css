@@ -53,14 +53,43 @@ body {
     font-size: 2.5rem;
 }
 
+.histogram-card {
+    grid-column: 1 / -1;
+    height: auto;
+    min-height: 300px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+#histogram-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+}
+
+#histogram-container h2 {
+    margin-bottom: 0.5rem;
+    color: #000;
+    flex-shrink: 0;
+}
+
+#histogram-chart {
+    flex: 1;
+    min-height: 0;
+    max-height: 100%;
+    width: 100%;
+}
+
 /* ===== Footer / Slider area ===== */
 .footer-container {
-    position: fixed;
+    position: relative;
     height: 150px;
-    bottom: 100px;
-    left: 0;
     width: 100%;
     padding: 10px;
+    margin-top: 2rem;
     background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(6px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
@@ -104,23 +133,22 @@ body {
 
 
 /* =====================================================
-   📱 Mobile
+   📱 Mobile & Tablet
 ===================================================== */
-@media (max-width: 480px) {
-
-    .grid-container {
-        grid-template-columns: 1fr;
-    }
-
+@media (max-width: 768px) {
     .footer-container {
-        position: static;
         height: auto;
-        bottom: auto;
     }
 
     .h2Features {
         font-size: 15px;
         margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .grid-container {
+        grid-template-columns: 1fr;
     }
 
     #greeting-user {
