@@ -1,32 +1,41 @@
 [
-  { "name": "Espresso", "price": 10, "createdAt": 1765806300000 },
-  { "name": "Double Espresso", "price": 12, "createdAt": 1765902000000 },
-  { "name": "Americano", "price": 13, "createdAt": 1766000400000 },
-  { "name": "Cappuccino", "price": 16, "createdAt": 1766086200000 },
-  { "name": "Latte", "price": 17, "createdAt": 1766181900000 },
-  { "name": "Flat White", "price": 18, "createdAt": 1766280300000 },
-  { "name": "Mocha", "price": 19, "createdAt": 1766366100000 },
-  { "name": "Hot Chocolate", "price": 16, "createdAt": 1766461800000 },
-  { "name": "Iced Latte", "price": 18, "createdAt": 1766560200000 },
-  { "name": "Iced Americano", "price": 15, "createdAt": 1766646000000 },
-  { "name": "Croissant", "price": 14, "createdAt": 1766741700000 },
-  { "name": "Chocolate Croissant", "price": 16, "createdAt": 1766840100000 },
-  { "name": "Blueberry Muffin", "price": 15, "createdAt": 1766925900000 },
-  { "name": "Banana Bread", "price": 17, "createdAt": 1767021600000 },
-  { "name": "Cheesecake Slice", "price": 22, "createdAt": 1767120000000 },
-  { "name": "Brownie", "price": 18, "createdAt": 1767205800000 },
-  { "name": "Cinnamon Roll", "price": 19, "createdAt": 1767301500000 },
-  { "name": "Apple Pie Slice", "price": 21, "createdAt": 1767399900000 },
-  { "name": "Cookie (Chocolate Chip)", "price": 10, "createdAt": 1767485700000 },
-  { "name": "Macaron Box (3 pcs)", "price": 24, "createdAt": 1767581400000 },
-  { "name": "Tuna Sandwich", "price": 28, "createdAt": 1767679800000 },
-  { "name": "Caprese Sandwich", "price": 29, "createdAt": 1767765600000 },
-  { "name": "Chicken Wrap", "price": 32, "createdAt": 1767861300000 },
-  { "name": "Greek Salad", "price": 27, "createdAt": 1767959700000 },
-  { "name": "Caesar Salad", "price": 30, "createdAt": 1768045500000 },
-  { "name": "Bagel with Cream Cheese", "price": 20, "createdAt": 1768141200000 },
-  { "name": "Avocado Toast", "price": 26, "createdAt": 1768239600000 },
-  { "name": "Mineral Water", "price": 8, "createdAt": 1768320000000 },
-  { "name": "Omelette Plate", "price": 34, "createdAt": 1768325400000 },
-  { "name": "Fresh Orange Juice", "price": 18, "createdAt": 1768411200000 }
+  { "name": "Espresso", "price": 10, "createdAt": 1735686000000 },
+  { "name": "Espresso", "price": 10, "createdAt": 1735772400000 },
+  { "name": "Espresso", "price": 10, "createdAt": 1735858800000 },
+
+  { "name": "Latte", "price": 15, "createdAt": 1736121600000 },
+  { "name": "Latte", "price": 15, "createdAt": 1736208000000 },
+  { "name": "Latte", "price": 15, "createdAt": 1736294400000 },
+  { "name": "Latte", "price": 15, "createdAt": 1736380800000 },
+
+  { "name": "Cappuccino", "price": 14, "createdAt": 1736640000000 },
+  { "name": "Cappuccino", "price": 14, "createdAt": 1736726400000 },
+
+  { "name": "Croissant", "price": 12, "createdAt": 1736985600000 },
+  { "name": "Croissant", "price": 12, "createdAt": 1737072000000 },
+  { "name": "Croissant", "price": 12, "createdAt": 1737158400000 },
+
+  { "name": "Brownie", "price": 15, "createdAt": 1737417600000 },
+  { "name": "Brownie", "price": 15, "createdAt": 1737504000000 },
+  { "name": "Brownie", "price": 15, "createdAt": 1737590400000 },
+  { "name": "Brownie", "price": 15, "createdAt": 1737676800000 },
+
+  { "name": "Greek Salad", "price": 32, "createdAt": 1737936000000 },
+  { "name": "Greek Salad", "price": 32, "createdAt": 1738022400000 },
+
+  { "name": "Chicken Salad", "price": 42, "createdAt": 1738281600000 },
+  { "name": "Chicken Salad", "price": 42, "createdAt": 1738368000000 },
+  { "name": "Chicken Salad", "price": 42, "createdAt": 1738454400000 },
+
+  { "name": "Tuna Sandwich", "price": 34, "createdAt": 1738713600000 },
+  { "name": "Tuna Sandwich", "price": 34, "createdAt": 1738800000000 },
+  { "name": "Tuna Sandwich", "price": 34, "createdAt": 1738886400000 },
+  { "name": "Tuna Sandwich", "price": 34, "createdAt": 1738972800000 },
+
+  { "name": "Avocado Toast", "price": 34, "createdAt": 1739232000000 },
+  { "name": "Avocado Toast", "price": 34, "createdAt": 1739318400000 },
+
+  { "name": "Israeli Breakfast", "price": 48, "createdAt": 1740110400000 },
+  { "name": "Israeli Breakfast", "price": 48, "createdAt": 1740196800000 },
+  { "name": "Israeli Breakfast", "price": 48, "createdAt": 1740283200000 }
 ]

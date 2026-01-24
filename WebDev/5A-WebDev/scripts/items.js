@@ -118,6 +118,7 @@ function checkOverdraft(clicked) {
     }
     // No balance found
     else {
+        showAlert("Load you balance please!");
         return true;
     }
 }

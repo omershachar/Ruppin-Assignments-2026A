@@ -169,14 +169,13 @@ else {
 function createHistogram() {
     let orders = storageNull();
     if (!orders) return;
-    
-    let today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    let todayOrders = orders.filter(o => new Date(o.createdAt) >= today);
+
     let counts = {};
-    todayOrders.forEach(o => counts[o.name] = (counts[o.name] || 0) + 1);
-    
+    orders.forEach(o => {
+        counts[o.name] = (counts[o.name] || 0) + 1;
+    });
+
+
     if (Object.keys(counts).length === 0) return;
     
     const chartCanvas = document.getElementById('histogram-chart');

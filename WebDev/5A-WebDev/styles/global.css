@@ -36,27 +36,3 @@ body {
     }
 }
 
-/* navbar style */
-.navbar ul {
-    list-style-type: none;
-    background-color: hsl(0, 0%, 25%);
-    padding: 0px;
-    margin: 0px;
-    overflow: hidden;
-}
-
-.navbar a {
-    color: white;
-    display: block;
-    text-decoration: none;
-    padding: 15px;
-    text-align: center;
-}
-
-.navbar a:hover{
-    background-color: hsl(0, 0%, 10%);
-}
-
-.navbar li {
-    float: inline-start;
-}
