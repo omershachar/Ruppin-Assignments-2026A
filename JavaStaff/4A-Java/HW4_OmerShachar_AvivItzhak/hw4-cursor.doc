@@ -1,0 +1,284 @@
+================================================================================
+                    Assignment 3: Network and Graphics Programming in JAVA
+                              Documentation File (hw3.doc)
+================================================================================
+
+STUDENT INFORMATION:
+-------------------
+Student 1 Name: Omer Shachar
+Student 1 ID: [Please fill in your student ID]
+
+Student 2 Name: Aviv Itzhak  
+Student 2 ID: [Please fill in your student ID]
+
+Submission Date: [Please fill in the submission date]
+
+
+================================================================================
+QUESTION 1: CLIENT-SERVER SYSTEM FOR ORDER MANAGEMENT
+================================================================================
+
+ARCHITECTURE OVERVIEW:
+----------------------
+
+The system implements a multi-threaded client-server architecture for managing
+business orders. The architecture consists of three main components:
+
+1. GUIClient - Graphical User Interface Client
+2. CentralServer - Central Server Application
+3. ClientHandler - Thread handler for each client connection
+4. Client - Data model representing a business client
+
+
+================================================================================
+PART 1: CLIENT SIDE (GUIClient)
+================================================================================
+
+ARCHITECTURE DESCRIPTION:
+
+The GUIClient class extends JFrame and implements a Swing-based GUI application
+that communicates with the CentralServer over TCP/IP sockets.
+
+COMPONENTS:
+
+1. GUI Components:
+   - Business Name Field (JTextField): Text input for business name
+   - Business Number Field (JTextField): Text input for 5-digit business number
+   - Item ComboBox (JComboBox): Dropdown selection for item type
+     * Sunglasses (1)
+     * Belt (2)
+     * Scarf (3)
+   - Quantity Spinner (JSpinner): Numeric input for quantity (minimum 1)
+   - Send Button (JButton): Initiates order submission
+   - Disconnect Button (JButton): Visible only after successful order (code 100)
+   - Status Area (JTextArea): Displays server responses and status messages
+
+2. Network Communication:
+   - Socket connection to server at localhost:9999
+   - PrintWriter for sending messages to server
+   - BufferedReader for receiving responses from server
+   - Connection is established on-demand when Send button is clicked
+
+3. Communication Protocol:
+   - Message Format: Uses pipe delimiter "|" to separate fields
+     Format: businessName|businessNumber|itemType|quantity
+   - Rationale for pipe delimiter:
+     * Simple and reliable - pipe character is rarely used in business names
+     * Easy to parse on server side
+     * Single character delimiter reduces message size
+     * Standard practice in many protocols
+   - Disconnect Message: "DISCONNECT" string sent when disconnecting
+
+4. Response Handling:
+   - Code 100: Success - Order processed successfully
+     * Shows disconnect button
+     * Allows sending more orders or disconnecting
+   - Code 200: Missing Data Error
+     * Displays error message
+     * Allows user to correct and resend
+   - Code 201: Business Name/Number Mismatch
+     * Displays error message
+     * Allows user to correct and resend
+   - Code 202: Invalid Format Error
+     * Displays specific validation error
+     * Allows user to correct and resend
+
+5. Disconnect Functionality:
+   - Sends "DISCONNECT" message to server
+   - Closes input/output streams
+   - Closes socket connection
+   - Closes application window (dispose)
+
+6. Validation:
+   - Client-side validation for business number (5 digits)
+   - Uses recursive method isFiveDigits() to validate format
+   - Validates that all fields are filled before sending
+
+7. Threading:
+   - Network operations (sendOrder) run in separate thread to prevent GUI blocking
+   - SwingUtilities.invokeLater() used for thread-safe GUI updates
+
+
+================================================================================
+PART 2: SERVER SIDE (CentralServer)
+================================================================================
+
+ARCHITECTURE DESCRIPTION:
+
+The CentralServer implements a multi-threaded server that listens on port 9999
+and handles multiple concurrent client connections. Each client connection is
+handled by a separate ClientHandler thread.
+
+COMPONENTS:
+
+1. CentralServer Class:
+   - Listens on port 9999
+   - Accepts incoming client connections
+   - Creates a new ClientHandler thread for each client
+   - Maintains a shared clientList (ArrayList<Client>)
+   - Server runs indefinitely until manually stopped
+
+2. ClientHandler Class (extends Thread):
+   - Handles individual client communication
+   - Each client gets its own thread instance
+   - Manages socket I/O streams
+   - Processes incoming order messages
+   - Sends responses back to client
+
+3. Business Logic:
+   - Client List Management:
+     * Maintains ArrayList<Client> to store all business clients
+     * Each Client object contains: businessName, businessNumber, itemType, quantity
+   
+   - New Client Processing:
+     * If business number doesn't exist in list → Create new Client object
+     * Add new client to the list
+     * Return success code 100
+   
+   - Existing Client Processing:
+     * If business number exists → Find existing Client object
+     * Verify business name matches existing client's name
+     * If name matches → Update quantity (add to existing quantity)
+     * If name doesn't match → Return error code 201
+     * Return success code 100 after update
+
+4. Concurrency Control (Thread Safety):
+   - Mechanism: Synchronized block on clientList
+   - Implementation: synchronized (clientList) { ... }
+   - Rationale:
+     * Prevents race conditions when multiple threads access the list simultaneously
+     * Ensures atomic operations when checking for existing clients and adding/updating
+     * Prevents data corruption from concurrent modifications
+     * Simple and effective for this use case (single shared resource)
+   - Scope: All list operations (search, add, update) are within synchronized block
+   - Alternative considered: ReentrantLock, but synchronized is simpler and sufficient
+
+5. Message Parsing and Validation:
+   - Parses pipe-delimited message into 4 fields
+   - Validates message format (exactly 4 fields)
+   - Validates each field is not empty
+   - Validates business number format (exactly 5 digits using regex: \\d{5})
+   - Validates item type (must be 1, 2, or 3)
+   - Validates quantity (must be positive integer)
+
+6. Response Codes:
+   - 100: Success - Order processed successfully
+     * New client added OR existing client quantity updated
+   - 200: Missing Data Error
+     * Returned when: fields are missing or empty
+   - 201: Business Name/Number Mismatch
+     * Returned when: business number exists but name doesn't match
+   - 202: Invalid Format Error
+     * Returned when: business number format invalid (not 5 digits)
+     * Returned when: item type invalid (not 1, 2, or 3)
+     * Returned when: quantity invalid (not positive integer)
+     * Returned when: item type or quantity cannot be parsed as integer
+
+7. Error Handling:
+   - IOException handling for network operations
+   - Proper resource cleanup in finally blocks
+   - Try-with-resources for automatic stream closing
+   - Graceful client disconnection handling
+
+8. Thread Management:
+   - Each client connection spawns a new ClientHandler thread
+   - Thread lifecycle managed by Java Thread API
+   - Thread terminates when client disconnects or error occurs
+   - Server continues running to accept new connections
+
+
+================================================================================
+DATA MODEL: Client Class
+================================================================================
+
+The Client class represents a business client with the following attributes:
+- businessName: String - Name of the business
+- businessNumber: String - Unique 5-digit identifier
+- itemType: int - Type of item (1=sunglasses, 2=belt, 3=scarf)
+- quantity: int - Total quantity ordered
+
+Key Methods:
+- addQuantity(int): Adds to existing quantity
+- matchesByBusinessNumber(String): Checks if business number matches
+- matchesBusinessName(String): Checks if business name matches
+- equals(Object): Equality based on business number only
+- toString(): String representation for logging
+
+
+================================================================================
+COMMUNICATION FLOW:
+================================================================================
+
+1. Client connects to server (on Send button click)
+2. Client sends message: businessName|businessNumber|itemType|quantity
+3. Server receives message in ClientHandler thread
+4. Server parses and validates message
+5. Server checks if client exists by business number
+6. Server either:
+   - Adds new client (if doesn't exist)
+   - Updates existing client quantity (if exists and name matches)
+   - Returns error (if name mismatch or validation fails)
+7. Server sends response: code|message
+8. Client receives and displays response
+9. If code 100: Disconnect button becomes visible
+10. Client can send more orders or disconnect
+11. On disconnect: Client sends "DISCONNECT", closes connection
+
+
+================================================================================
+TECHNICAL DECISIONS AND RATIONALE:
+================================================================================
+
+1. Pipe Delimiter ("|"):
+   - Chosen for simplicity and reliability
+   - Rarely appears in business names
+   - Easy to parse with String.split()
+   - Single character reduces message overhead
+
+2. Synchronized Block for Concurrency:
+   - Simple and effective for single shared resource
+   - No need for complex locking mechanisms
+   - Sufficient for this application's requirements
+   - Java's built-in synchronization is well-tested
+
+3. Multi-threaded Server:
+   - Allows handling multiple clients simultaneously
+   - Each client gets dedicated thread
+   - Prevents one slow client from blocking others
+   - Standard pattern for network servers
+
+4. On-demand Connection:
+   - Client connects only when needed
+   - Reduces server load
+   - Allows client to work offline (validation)
+   - Connection established on first Send click
+
+5. Recursive Validation:
+   - isFiveDigits() method uses recursion
+   - Demonstrates recursive programming
+   - Validates each digit individually
+   - More educational than simple regex (though regex is also used on server)
+
+
+================================================================================
+REQUIREMENTS COMPLIANCE CHECK:
+================================================================================
+
+PART 1 (GUIClient) - ALL REQUIREMENTS MET:
+✓ Input fields: Business name, Business number (5 digits), Item selection, Quantity
+✓ Buttons: Send, Disconnect (visible after success)
+✓ Communication protocol: Pipe-delimited format with documented rationale
+✓ Response handling: Codes 100, 200, 201, 202 all implemented
+✓ Disconnect: Sends message, closes socket, closes window
+
+PART 2 (CentralServer) - ALL REQUIREMENTS MET:
+✓ Business logic: Client list management, add new, update existing
+✓ Concurrency: Synchronized block on clientList with documented explanation
+✓ Response codes: 100, 200, 201, 202 all implemented
+✓ Multi-threaded: Each client gets separate thread
+✓ Port 9999: Server listens on specified port
+
+
+================================================================================
+END OF DOCUMENTATION
+================================================================================
