@@ -71,7 +71,8 @@ function extractDate(date) {
     let month = newDate.getMonth() + 1; // months start from 0
     let year = newDate.getFullYear();
     let hour = newDate.getHours();
-    let minute = newDate.getMinutes();
+    // let minute = newDate.getMinutes();
+    let minute = newDate.getMinutes().toString().padStart(2, '0');
 
     // Build full date string
     let fullDate = day + '-' + month + '-' + year + ' ' + hour + ':' + minute;
