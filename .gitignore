@@ -1,18 +1,21 @@
 # personal files & folders
-Omer/
+*Omer/
+*omer/
+*omer*
 Aviv/
 
-prDatabases/
+pr*/
+*.env
+*env
 
-prJava/
-EclipseProjects/
-
-prWebDev/
 Assignments-Final/
 
 # system & random shit to be ignored
+RandomShit/
 .vs/
 .vscode/
+.cursor/
 .github/
 .idea/
 Web.config
+EclipseProjects/
