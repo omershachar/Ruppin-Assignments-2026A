@@ -1,6 +1,8 @@
 # 📝 Final Exam Details
 
-***[🔗(../README.md)](../README.md)***
+* ***[🔗(../README.md)](../README.md)***
+* ***[🔗(../Lectures-WebDev/)](../Lectures-WebDev/)***
+* ***[🔗(../WebDevSilbus.pdf)](../WebDevSilbus.pdf)***
 
 ```
 test/
