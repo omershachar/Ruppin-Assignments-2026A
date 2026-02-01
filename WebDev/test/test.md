@@ -12,11 +12,10 @@ test/
 │
 ├── exams/                  # The latest updated example test -> most resembles the final test!
 │
-├── allLectures.pdf         # All of the courses lectures in a giant pdf file -> allowed in the final test!
+├── allLectures.pdf         # All of the  Course Lectures in a giant pdf file -> allowed in the final test!
 ├── css3-cheat-sheet.pdf    # All relevant css properties -> allowed in the final test!
 │
-├── test.md                 # Final Test relevant info
-
+└── test.md                 # Final Test relevant info
 ```
 
 **Important:** All material covered in the course is included in the exam **EXCEPT Bootstrap**, which has been removed from the material.
@@ -38,5 +37,7 @@ The exam is divided into two parts:
 * **Format:** Computer-based questions similar to class exercises.
 * **Submission:** At the end, zip your files and upload them to Moodle (submit **only** `.html`, `.css`, and `.js` files, exactly as they would be uploaded to a server).
 * **Provided Materials (Digital - Do not print):**
-    1.  **Course Lectures:** One consolidated presentation file containing all course slides.
-    2.  **CSS Cheat Sheet:** A PDF file containing all CSS properties.
+    1.  **Course Lectures:** One consolidated presentation file containing all course slides -> 
+        ***[🔗(./allLectures.pdf)](./allLectures.pdf)***
+    2.  **CSS Cheat Sheet:** A PDF file containing all CSS properties -> 
+        ***[🔗(./css3-cheat-sheet.pdf)](./css3-cheat-sheet.pdf)***
