@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Sky Rent</title>
+	<style>
+		/* Basic styling for the page */
+		body {
+			font-family: Calibri; 
+		}
+
+		.mainTitle {
+			padding-left: 26%;
+			color: blue; 
+		}
+
+		#items {
+			display: flex; /* Display items in a row */
+		}
+
+		img {
+			height: 80px; /* Set image height */
+		}
+
+		#items > div {
+			border: 1px solid black; /* Add border to each item */
+			width: 200px; /* Set item width */
+			height: 200px; /* Set item height */
+			text-align: center; /* Center text inside div */
+		}
+
+		#items > div:hover {
+			background-color: yellow; /* Change background on hover */
+			color: white; /* Change text color on hover */
+		}
+
+			/*.yellowWhite {
+				background-color: yellow;*/ /* Change background on hover */
+				/*color: white;*/ /* Change text color on hover */
+			/*}*/
+
+		#cartPrice {
+			color: orangered; 
+			padding: 20px; 
+		}
+	</style>
+</head>
+<body>
+	<h1 class="mainTitle">Sky Rent</h1> <!-- Main title of the page -->
+	<div id="items"></div> <!-- Container for items to rent -->
+	<h3 id="cartPrice"></h3> <!-- Display total cart price -->
+	<div id="cart"></div> <!-- Container for displaying selected cart items -->
+
+	<script>
+		// Initialize current cart price and items in cart
+		var currentCartPrice = 0;
+		var itemsInCart = [];
+
+		// Define available clothes with prices and images
+		clothes = {
+			pants: {
+				price: 150,
+				image: "images/pants.jpg" // Path to image
+			},
+			boots: {
+				price: 300,
+				image: "images/boots.jpg"
+			},
+			coat: {
+				price: 220,
+				image: "images/coat.jpg"
+			},
+			snowboard: {
+				price: 500,
+				image: "images/snowboard.jpg"
+			}
+		}
+
+
+
+		let ul = document.createElement("ul"); // Create a list
+		let itemsDiv = document.getElementById("items");
+		let cartItems = document.getElementById("cart");
+		cartItems.appendChild(ul); // Add updated cart items
+
+		let countItems = [];
+
+			for (let i in clothes) {
+				let div = document.createElement("div"); // Create a new div for each item
+				div.classList.add("itemDiv"); // Apply CSS class for styling
+
+				let hItem = document.createElement("h3");
+				hItem.innerText = i; // Set item name
+				div.appendChild(hItem);
+
+				let itemImg = document.createElement("img");
+				itemImg.src = clothes[i].image; // Set item image source
+				div.appendChild(itemImg);
+
+				let hPrice = document.createElement("h3");
+				hPrice.innerText = clothes[i].price; // Set item price
+				div.appendChild(hPrice);
+
+				// Add click event to add item to cart
+				div.onclick = function () {
+					addToCart(i, clothes[i].price);
+				}
+
+				itemsDiv.appendChild(div); // Add the item div to the container
+
+				countItems.push({ key: i, count: 0 });
+			}
+		
+		console.log(countItems);
+			function addToCart(key, price) {
+				// Update cart price
+				let cartPrice = document.getElementById("cartPrice");
+
+				
+				let li = document.createElement("li");
+				let spn = document.createElement("span");
+				for (let i in countItems) {
+					if (countItems[i].key == key) {
+						countItems[i].count++;
+						// Add a free item if count reaches 3
+						if (countItems[i].count == 4) {
+							spn.innerHTML = countItems[i].key + " : 0 euro";
+						}
+						else {
+							currentCartPrice += price; // Increment total price
+							spn.innerHTML = key + " : " + price + " euro";
+						}
+					}
+				}
+				li.appendChild(spn);
+				ul.appendChild(li);
+
+				cartPrice.innerHTML = "Total Price: " + currentCartPrice + " euro";
+			}
+
+	</script>
+</body>
+</html>

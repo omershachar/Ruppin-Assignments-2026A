@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="gotJsondata.js"></script>
+
+    <style type="text/css">
+
+        #nickPH {
+            float:left;
+            width:300px;
+        }
+
+        #namePH {
+            float: left;
+            width: 300px;
+        }
+
+
+    </style>
+
+    <script>
+
+        // this function returns a shuffeld array
+        function shuffle(a) {
+            var j, x, i;
+            for (i = a.length - 1; i > 0; i--) {
+                j = Math.floor(Math.random() * (i + 1));
+                x = a[i];
+                a[i] = a[j];
+                a[j] = x;
+            }
+            return a;
+        }
+
+    </script>
+
+</head>
+<body>
+    <div>
+        <button>Play</button>
+    </div>
+    <div id="nickPH">
+        <h3>NickName</h3>
+    </div>
+    <div id="namePH">
+        <h3>Name</h3>
+    </div>
+</body>
+</html>

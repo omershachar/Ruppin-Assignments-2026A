@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<script src="hpList.js"></script>
+
+	<style>
+		*{
+			font-family: Calibri;
+		}
+
+		#data > div {
+			border: 1px solid black;
+			background-color: lightyellow;
+			padding : 10px;
+		}
+        .descContainer{
+			display : flex;
+			gap: 5px;
+			padding: 10px;
+        }
+		img {
+		 height:	80px;
+		}
+
+        .hide {
+            display: none;
+        }
+        .show {
+            display: flex;
+        }
+	</style>
+</head>
+
+<body>
+	<h1>Harry Potter Rating</h1> <!-- Main title of the page -->
+	<div id="data"></div> <!-- Container for dynamically generated movie data -->
+	
+	<script>
+
+		let data = document.getElementById("data");
+
+		for (let i in list["Harry Potter Movies List"]) {
+			let div = document.createElement("div");
+
+			let h4 = document.createElement("h4");
+			h4.innerHTML = (Number(i) + 1) + " ) " + list["Harry Potter Movies List"][i].title;
+
+
+			let btn = document.createElement("button");
+			btn.innerHTML = "more details";
+
+			
+            div.appendChild(h4);
+			div.appendChild(btn);
+
+            data.appendChild(div);
+
+			let descContainer = document.createElement("div");
+            descContainer.className = "hide";
+
+			let img = document.createElement("img");
+			img.src = list["Harry Potter Movies List"][i].poster_path;
+
+			let imgDiv = document.createElement("div");
+			imgDiv.appendChild(img);
+
+			let overviewDiv = document.createElement("div");
+            overviewDiv.innerHTML = list["Harry Potter Movies List"][i].overview
+
+            descContainer.appendChild(imgDiv);
+			descContainer.appendChild(overviewDiv);
+
+			div.appendChild(descContainer);
+
+            btn.onclick = function () {
+				if (descContainer.className == "hide") {
+					descContainer.className = "descContainer";
+                    localStorage.setItem(list["Harry Potter Movies List"][i].title, list["Harry Potter Movies List"][i].overview)
+
+				}
+				else {
+					descContainer.className = "hide";
+                    localStorage.removeItem(list["Harry Potter Movies List"][i].title)
+				}
+            }
+
+           
+		}
+	</script>
+
+
+
+</body>
+</html>

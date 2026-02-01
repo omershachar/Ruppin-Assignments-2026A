@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Sky Rent</title>
+	<style>
+		/* Basic styling for the page */
+		body {
+			font-family: Calibri;
+		}
+
+		.mainTitle {
+			padding-left: 26%;
+			color: blue;
+		}
+		#items {
+			display: flex;
+			gap: 2px;
+		}
+		.itemDiv{
+			width: 200px;
+			height: 200px;
+			border: 1px solid black;
+			text-align: center;
+		}
+		img{
+			height: 50px;
+		}
+
+		.yellow{
+			background-color: yellow;
+		}
+
+      /*  .itemDiv:hover{
+			color: white;
+			background-color: yellow;
+        }*/
+
+	</style>
+</head>
+<body>
+	<h1 class="mainTitle">Sky Rent</h1> <!-- Main title of the page -->
+	<div id="items"></div> <!-- Container for items to rent -->
+	<h3 id="cartPrice"></h3> <!-- Display total cart price -->
+	<div id="cart"></div> <!-- Container for displaying selected cart items -->
+
+	<script>
+		clothes = {
+			pants: {
+				price: 150,
+				image: "images/pants.jpg"
+			},
+			boots: {
+				price: 300,
+				image: "images/boots.jpg"
+			},
+			coat: {
+				price: 220,
+				image: "images/coat.jpg"
+			},
+			snowboard: {
+				price: 500,
+				image: "images/snowboard.jpg"
+			}
+
+		}
+
+		let container = document.querySelector("#items");
+
+		let ul = document.createElement("ul");
+		document.querySelector("#cart").appendChild(ul);
+
+		let totalPrice = 0;
+
+		let countItems = [];
+
+		
+		for (let item in clothes) {
+
+			countItems.push({ key: item, count: 0 });
+
+			console.log(countItems);
+
+			console.log(item);
+			let div = document.createElement("div");
+			div.setAttribute("class", "itemDiv");
+
+
+			div.onmouseover = function () {
+				this.classList.add("yellow");
+			}
+            div.onmouseout = function () {
+                this.classList.remove("yellow");
+            }
+			
+			 
+			div.onclick = function () {
+
+                let li = document.createElement("li");
+                li.innerHTML = item + " : " + clothes[item].price + " euro";
+                ul.appendChild(li);
+                totalPrice += clothes[item].price;
+				document.getElementById("cartPrice").innerHTML = "Total Price : " + totalPrice + " euro";
+
+
+				for (let i in countItems) {
+					if (countItems[i].key == item) {
+						countItems[i].count++;
+
+						if (countItems[i].count == 3) {
+                            let li = document.createElement("li");
+                            li.innerHTML = item + " : " + 0 + " euro";
+                            ul.appendChild(li);
+						}
+					}
+				}
+
+			}
+
+			container.appendChild(div);
+
+			let hItem = document.createElement("h3");
+			hItem.innerHTML = item;
+
+			let imgItem = document.createElement("img");
+			imgItem.setAttribute("src", clothes[item].image);
+
+			let price = document.createElement("h3");
+			price.innerHTML = clothes[item].price + " euro";
+
+            div.appendChild(hItem);
+            div.appendChild(imgItem);
+            div.appendChild(price);
+
+
+
+		}
+
+		function addToCart() {
+
+		}
+
+	</script>
+</body>
+</html>

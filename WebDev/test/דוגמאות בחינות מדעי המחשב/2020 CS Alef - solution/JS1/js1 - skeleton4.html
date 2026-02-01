@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <style type="text/css">
+
+        .attack {
+            display: inline-block;
+            width: 200px;
+            border:2px solid black
+        }
+
+        #ph {
+            margin-top:20px
+        }
+    </style>
+
+    <script src="moves.js"></script>
+
+
+
+    <script>
+
+        // Enter your JS code here
+
+        function init() {
+
+            attackTypes = [];
+
+            for (var i = 0; i < moves.length; i++) {
+                let t = moves[i].type;
+                if (attackTypes[t] == undefined)
+                    attackTypes[t] = [];
+                attackTypes[t].push(i);
+            }
+
+            renderAttackType(attackTypes);
+
+        }
+
+
+        function renderAttackType(arr) {
+            var str = "<option value = '-1'>select</option>";
+            for (k in arr) {
+                str += "<option value = '" +  k + "'>" + k + "</option>";
+            }
+            document.getElementById("moves").innerHTML = str;
+        }
+
+        function renderMoves(attack,min) {
+            var sum = 0;
+            var counter = 0;
+            var str = "";
+            for (var i = 0; i < attackTypes[attack].length; i++) {
+                indexInMoves = attackTypes[attack][i];
+                let name = moves[indexInMoves].ename;
+                let accuracy = moves[indexInMoves].accuracy;
+                if (accuracy == null)
+                    accuracy = 0;
+                else{
+                    sum += accuracy;
+                    counter++;
+                }
+                let power = moves[indexInMoves].power;
+                if (power == null)
+                    power = 0;
+                if (power < min)
+                    continue;
+
+                str += "<div class='attack'>";
+                    str += "<p>name: "     + name + "</p>";
+                    str += "<p>power: "    + power + "</p>";
+                    str += "<p>accuracy: " + accuracy + "</p>";
+                str += "</div>";
+            }
+            document.getElementById("ph").innerHTML = str;
+            let avg = sum / counter;
+            document.getElementById("averageAccuracy").innerHTML = "The average is : " + avg;
+        }
+
+        function show2(min) {
+            let attack = document.getElementById("moves").value;
+            renderMoves(attack,min);
+        }
+
+        //function showAbove(min) {
+
+        //    var sum = 0;
+        //    var counter = 0;
+        //    var str = "";
+        //    let attack = document.getElementById("moves").value;
+        //    for (var i = 0; i < attackTypes[attack].length; i++) {
+        //        indexInMoves = attackTypes[attack][i];
+        //        let name = moves[indexInMoves].ename;
+        //        let accuracy = moves[indexInMoves].accuracy;
+        //        if (accuracy == null)
+        //            accuracy = 0;
+        //        else {
+        //            sum += accuracy;
+        //            counter++;
+        //        }
+        //        let power = moves[indexInMoves].power;
+        //        if (power == null)
+        //            power = 0;
+        //        if (power <= min)
+        //            continue;
+        //        str += "<div class='attack'>";
+        //        str += "<p>name: " + name + "</p>";
+        //        str += "<p>power: " + power + "</p>";
+        //        str += "<p>accuracy: " + accuracy + "</p>";
+        //        str += "</div>";
+        //    }
+        //    document.getElementById("ph").innerHTML = str;
+        //    let avg = sum / counter;
+        //    document.getElementById("averageAccuracy").innerHTML = "The average is : " + avg;
+
+        //}
+
+
+    </script>
+
+</head>
+<body onload="init()">
+
+    Attack Types: <select id="moves" onchange="renderMoves(this.value,0)"></select>
+    <span id="averageAccuracy"></span>
+    <div id="ph"></div>
+    <div>
+
+        <input type="range" value="0" min="0" max="100" onchange="show2(this.value)" />
+
+    </div>
+    
+</body>
+</html>

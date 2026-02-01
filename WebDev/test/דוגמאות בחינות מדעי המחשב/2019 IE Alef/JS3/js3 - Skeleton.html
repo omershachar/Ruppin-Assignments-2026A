@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <script src="cars.js"></script>
+    <script>
+
+
+    function action() {
+
+        // calculate the prices using a map and an arrow function
+        // it should return an array called prices
+        // example of a short if statement  (x == 3) ? "x is equal to 3" : "x is not equal to 3"
+        // ***** Enter your code here ****** 
+        
+
+
+        showPrices(prices);
+
+        // use jQuery code to select h1 and hide the one that was selected
+        // ***** Enter your code here ******
+
+        }
+
+        function showPrices(prices) {
+            str = "";
+            for (var i = 0; i < prices.length; i++) {
+                str += "<h1>" + prices[i] + "</h1>";
+            }
+            document.getElementById("ph").innerHTML = str;
+        }
+
+    </script>
+</head>
+<body>
+
+
+    <button onclick="action()">show prices</button>
+
+    <div id="ph">
+
+
+    </div>
+
+
+
+
+</body>
+</html>
