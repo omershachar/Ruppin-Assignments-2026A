@@ -1,5 +1,22 @@
 ## 📝 Final Exam Details
 
+```
+test/
+│
+├── CS-final-tests-past/    # Tests from recent years, not all relevant for current final test
+│   ├── 2017 IE Alef/
+│   ├── ...                 # Total past tests = 10
+│   └── 2020 IE Bet/
+│
+├── exams/                  # The latest updated example test -> most resembles the final test!
+│
+├── allLectures.pdf         # All of the courses lectures in a giant pdf file -> allowed in the final test!
+├── css3-cheat-sheet.pdf    # All relevant css properties -> allowed in the final test!
+│
+├── test.md                 # Final Test relevant info
+
+```
+
 **Important:** All material covered in the course is included in the exam **EXCEPT Bootstrap**, which has been removed from the material.
 
 **Location & Logistics:**

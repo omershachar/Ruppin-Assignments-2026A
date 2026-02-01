@@ -1,5 +1,13 @@
 # A folder for all assignments in WebDev 2026A
 
+- [Assignment 1](/1A-WebDev/.)
+- [Assignment 2](/2A-WebDev/.)
+- [Assignment 3](/3A-WebDev/.)
+- [Assignment 4](/4A-WebDev/.)
+- [Assignment 5](/5A-WebDev/.)
+
+---
+
 # Developing Internet Systems - Client Side (Front-End)
 
 - **Institution:** Ruppin Academic Center
@@ -11,13 +19,13 @@
 ---
 
 ## 👨‍🏫 Instructor Information
-* **Lecturer:** Ms. Yael Sela Zeira 1]
-* **Email:** yael007@gmail.com * **Office Hours:** By appointment in advance 
+* **Lecturer:** Ms. Yael Sela Zeira
+* **Email:** yael007@gmail.com (**Office Hours:** By appointment in advance )
 
 ---
 
 ## 📖 Course Overview
-This course provides theoretical and practical knowledge in Front-End user interface development and client-side web application construction It focuses on core technologies—HTML, CSS, and JavaScript—emphasizing the creation of interactive, accessible, and responsive web pages21].
+This course provides theoretical and practical knowledge in Front-End user interface development and client-side web application construction It focuses on core technologies—HTML, CSS, and JavaScript—emphasizing the creation of interactive, accessible, and responsive web pages.
 
 ### Key Learning Outcomes
 * Master basic client-side languages: HTML, CSS, JavaScript
@@ -39,9 +47,9 @@ This course provides theoretical and practical knowledge in Front-End user inter
 ## 📊 Grading & Requirements
 
 | Component | Weight | Notes |
-| :--- | :--- | :--- |
-| **Assignments & Final Project** | 35% | Submitted in pairs. Includes a final practical project with a defense meeting, |
-| **Final Exam** | 65% | Covers all course topics. Includes theoretical and practical parts (on a computer, **no internet**) **Must pass with at least 60 to pass the course** |
+| --- | --- | --- |
+| **Assignments & Final Project** | 35% | Submitted in pairs. Includes a final practical project with a defense meeting |
+| **Final Exam** | 65% | Covers all course topics. Includes theoretical and practical parts (on a computer, **no internet**) - **Must pass with at least 60 to pass the course** |
 
 > **Note:** Assignments are submitted in pairs Homework is given every two weeks and is integral to the learning process
 
@@ -57,7 +65,7 @@ This course provides theoretical and practical knowledge in Front-End user inter
 | **4** | **Bootstrap & Positioning** | CSS Positioning (static, relative, fixed), Z-index. Intro to Bootstrap |
 | **5** | **Advanced Layout** | CSS Grid, Flexbox |
 | **6** | **Intro to JavaScript** | Variables, Data types, Operators, Functions, Event handling (click, mouseover), DOM intro |
-| **7** | **Debugging & Control Flow** | Chrome DevTools, Debugging, If-else, Loops, Switch. |
+| **7** | **Debugging & Control Flow** | Chrome DevTools, Debugging, If-else, Loops, Switch |
 | **8** | **Functions & Arrays** | Arrow functions, Arrays (manipulation/methods), Dynamic HTML generation |
 | **9** | **Objects & Storage** | JS Objects, JSON, Local Storage, Query Strings, Value vs Reference |
 | **10** | **Scheduling** | `setTimeout` and `setInterval` |
@@ -68,4 +76,5 @@ This course provides theoretical and practical knowledge in Front-End user inter
 ---
 
 ## 📚 Bibliography
-There is no official textbook. The course relies heavily on articles and online information. Students are expected to practice self-learning for technological topics not covered in class
+- There is no official textbook. The course relies heavily on articles and online information.
+- Students are expected to practice self-learning for technological topics not covered in class.
